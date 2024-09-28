@@ -1,0 +1,140 @@
+{
+  "name": "@lifi/sdk",
+  "version": "3.2.3",
+  "description": "LI.FI Any-to-Any Cross-Chain-Swap SDK",
+  "keywords": [
+    "bridge",
+    "bridge-aggregation",
+    "cross-chain",
+    "cross-chain-applications",
+    "cross-chain-bridge",
+    "dapp",
+    "defi",
+    "ethereum",
+    "ethers",
+    "lifi",
+    "metamask",
+    "multi-chain",
+    "sdk",
+    "swap",
+    "viem",
+    "wagmi",
+    "web3",
+    "web3-react"
+  ],
+  "homepage": "https://github.com/lifinance/sdk",
+  "bugs": {
+    "url": "https://github.com/lifinance/sdk/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/lifinance/sdk.git"
+  },
+  "license": "Apache-2.0",
+  "author": "LI.FI <github@li.finance>",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/_types/index.d.ts",
+      "import": "./src/_esm/index.js",
+      "default": "./src/_cjs/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./src/_cjs/index.js",
+  "module": "./src/_esm/index.js",
+  "types": "./src/_types/index.d.ts",
+  "typings": "./src/_types/index.d.ts",
+  "sideEffects": false,
+  "directories": {
+    "test": "tests"
+  },
+  "files": [
+    "src",
+    "!src/**/*.test.ts",
+    "!src/**/*.mock.ts",
+    "!src/**/*.spec.ts",
+    "!src/**/*.handlers.ts",
+    "!src/**/*.tsbuildinfo"
+  ],
+  "scripts": {
+    "build": "yarn clean && yarn build:cjs && yarn build:esm && yarn build:types",
+    "build:cjs": "tsc --project ./tsconfig.build.json --module commonjs --outDir ./src/_cjs --removeComments --verbatimModuleSyntax false && printf '{\"type\":\"commonjs\"}' > ./src/_cjs/package.json",
+    "build:esm": "tsc --project ./tsconfig.build.json --module es2015 --outDir ./src/_esm && printf '{\"type\": \"module\",\"sideEffects\":false}' > ./src/_esm/package.json",
+    "build:types": "tsc --project ./tsconfig.build.json --module esnext --declarationDir ./src/_types --emitDeclarationOnly --declaration --declarationMap",
+    "clean": "rm -rf dist tsconfig.tsbuildinfo tsconfig.build.tsbuildinfo src/tsconfig.build.tsbuildinfo src/_esm src/_cjs src/_types",
+    "coverage": "vitest run --coverage",
+    "postinstall": "husky",
+    "lint": "eslint --ext .tsx --ext .ts ./src",
+    "lint:fix": "eslint --ext .tsx --ext .ts ./src --fix",
+    "prepack": "pinst --disable",
+    "postpack": "pinst --enable",
+    "package": "npm run build && npm pack",
+    "pre-commit": "lint-staged",
+    "pre-push": "yarn check:types && yarn check:circular-deps && yarn test:unit",
+    "prepublishOnly": "yarn node scripts/prepublishOnly.js",
+    "prettier:fix": "prettier --write ./src/.",
+    "release": "standard-version -a",
+    "release:alpha": "standard-version -a --prerelease alpha --skip.changelog",
+    "release:beta": "standard-version -a --prerelease beta --skip.changelog",
+    "test": "vitest --run --dangerouslyIgnoreUnhandledErrors",
+    "test:cov": "yarn test --coverage",
+    "test:unit": "yarn test .unit.spec.ts",
+    "check:types": "tsc --noEmit",
+    "check:circular-deps": "madge --circular $(find ./src -name '*.ts')",
+    "check:circular-deps-graph": "madge --circular $(find ./src -name '*.ts') --image graph.svg",
+    "watch": "tsc -w -p ./tsconfig.json",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "yarn run lint:fix",
+      "yarn run prettier:fix"
+    ]
+  },
+  "dependencies": {
+    "@lifi/types": "^15.13.0",
+    "@solana/wallet-adapter-base": "^0.9.23",
+    "@solana/web3.js": "^1.95.3",
+    "viem": "^2.21.8"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
+    "@types/fs-extra": "^11.0.4",
+    "@types/ws": "^8.5.12",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "@vitest/coverage-v8": "^2.1.1",
+    "bs58": "^6.0.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-jsdoc": "^48.11.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "fs-extra": "^11.2.0",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "madge": "^8.0.0",
+    "msw": "^2.4.8",
+    "pinst": "^3.0.0",
+    "prettier": "^3.3.3",
+    "standard-version": "^9.5.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2",
+    "vitest": "^2.1.1"
+  },
+  "peerDependencies": {
+    "@solana/wallet-adapter-base": "^0.9.0",
+    "@solana/web3.js": "^1.93.0",
+    "viem": "^2.16.0"
+  },
+  "packageManager": "yarn@4.4.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "standard-version": {
+    "scripts": {
+      "postbump": "node scripts/version.js && git add ."
+    }
+  }
+}
