@@ -18,12 +18,12 @@ export default function IndexPage() {
     <div className="container relative">
       <PageHeader>
         <Announcement />
-        <PageHeaderHeading>Build your component library</PageHeaderHeading>
+        <PageHeaderHeading>Build your authenticaton library</PageHeaderHeading>
         <PageHeaderDescription>
-          Beautifully designed components that you can copy and paste into your
+          Beautifully designed authenticaton components that you can copy and paste into your
           apps.
         </PageHeaderDescription>
-        <PageActions>
+        {/* <PageActions>
           <Button asChild size="sm">
             <Link href="/docs">Get Started</Link>
           </Button>
@@ -36,7 +36,7 @@ export default function IndexPage() {
               GitHub
             </Link>
           </Button>
-        </PageActions>
+        </PageActions> */}
       </PageHeader>
       <ExamplesNav className="[&>a:first-child]:text-primary" />
       <section className="overflow-hidden rounded-lg border bg-background shadow-md md:hidden md:shadow-xl">
