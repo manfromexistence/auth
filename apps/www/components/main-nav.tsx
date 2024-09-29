@@ -41,38 +41,49 @@ export function MainNav() {
           Components
         </Link>
         <Link
-          href="/blocks"
+          href="/web2"
           className={cn(
             "transition-colors hover:text-foreground/80",
-            pathname?.startsWith("/blocks")
+            pathname?.startsWith("/web2")
               ? "text-foreground"
               : "text-foreground/60"
           )}
         >
-          Blocks
+          Web2
         </Link>
         <Link
-          href="/charts"
+          href="/web3"
           className={cn(
             "transition-colors hover:text-foreground/80",
             pathname?.startsWith("/docs/component/chart") ||
-              pathname?.startsWith("/charts")
+              pathname?.startsWith("/web3")
               ? "text-foreground"
               : "text-foreground/60"
           )}
         >
-          Charts
+          Web3
         </Link>
         <Link
-          href="/themes"
+          href="/biometric"
           className={cn(
             "transition-colors hover:text-foreground/80",
-            pathname?.startsWith("/themes")
+            pathname?.startsWith("/biometric")
               ? "text-foreground"
               : "text-foreground/60"
           )}
         >
-          Themes
+          Biometric
+        </Link>
+        <Link
+          href="/more"
+          className={cn(
+            "transition-colors hover:text-foreground/80",
+            pathname?.startsWith("/more")
+              ? "text-foreground"
+              : "text-foreground/60"
+          )}
+        >
+          More
         </Link>
         <Link
           href="/examples"
@@ -84,17 +95,6 @@ export function MainNav() {
           )}
         >
           Examples
-        </Link>
-        <Link
-          href="/colors"
-          className={cn(
-            "transition-colors hover:text-foreground/80",
-            pathname?.startsWith("/colors")
-              ? "text-foreground"
-              : "text-foreground/60"
-          )}
-        >
-          Colors
         </Link>
       </nav>
     </div>

@@ -25,8 +25,8 @@ export const docsConfig: DocsConfig = {
       href: "/web3",
     },
     {
-      title: "Bioinformative",
-      href: "/bioinformative",
+      title: "Biometric",
+      href: "/biometric",
     },
     {
       title: "More",
