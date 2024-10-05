@@ -10,8 +10,26 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/registry/default/ui/card"
+import { Input } from "@/registry/default/ui/input"
+import { Label } from "@/registry/default/ui/label"
 import { Button } from "@/registry/new-york/ui/button"
 import MailPage from "@/app/(app)/examples/mail/page"
+
+export const description =
+  "A simple login form with email and password. The submit button says 'Sign in'."
+
+export const iframeHeight = "600px"
+
+export const containerClassName =
+  "w-full h-screen flex items-center justify-center px-4"
 
 export default function IndexPage() {
   return (
@@ -20,46 +38,43 @@ export default function IndexPage() {
         <Announcement />
         <PageHeaderHeading>Build your authenticaton library</PageHeaderHeading>
         <PageHeaderDescription>
-          Beautifully designed authenticaton components that you can copy and paste into your
-          apps.
+          Beautifully designed authenticaton components that you can copy and
+          paste into your apps.
         </PageHeaderDescription>
-        {/* <PageActions>
-          <Button asChild size="sm">
-            <Link href="/docs">Get Started</Link>
-          </Button>
-          <Button asChild size="sm" variant="ghost">
-            <Link
-              target="_blank"
-              rel="noreferrer"
-              href={siteConfig.links.github}
-            >
-              GitHub
-            </Link>
-          </Button>
-        </PageActions> */}
       </PageHeader>
-      <ExamplesNav className="[&>a:first-child]:text-primary" />
-      <section className="overflow-hidden rounded-lg border bg-background shadow-md md:hidden md:shadow-xl">
-        <Image
-          src="/examples/mail-dark.png"
-          width={1280}
-          height={727}
-          alt="Mail"
-          className="hidden dark:block"
-        />
-        <Image
-          src="/examples/mail-light.png"
-          width={1280}
-          height={727}
-          alt="Mail"
-          className="block dark:hidden"
-        />
-      </section>
-      <section className="hidden md:block">
-        <div className="overflow-hidden rounded-lg border bg-background shadow">
-          <MailPage />
-        </div>
-      </section>
+      {/* <Card className="mx-auto w-full max-w-sm">
+        <CardHeader>
+          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardDescription>
+            Enter your details below to login to your account.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="grid gap-4">
+          <div className="grid gap-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="m@example.com"
+              required
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="password">Password</Label>
+            <Input id="password" type="password" required />
+          </div>
+        </CardContent>
+        <CardFooter className="m-0 flex flex-col gap-2">
+          <Button className="w-full">Sign in</Button>
+          <div className="w-full rounded-md border py-2">options</div>
+        </CardFooter>
+      </Card> */}
+      <div className="mt-4 text-center text-sm">
+        Dont&apos;t have an account?{" "}
+        <Link href="#" className="underline">
+          Sign up
+        </Link>
+      </div>
     </div>
   )
 }
