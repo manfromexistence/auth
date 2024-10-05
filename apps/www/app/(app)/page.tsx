@@ -69,6 +69,9 @@ export default function IndexPage() {
           <div className="w-full rounded-md border py-2">options</div>
         </CardFooter>
       </Card> */}
+      <div className="mx-auto w-full max-w-sm border rounded-md">
+        Auth
+      </div>
       <div className="mt-4 text-center text-sm">
         Dont&apos;t have an account?{" "}
         <Link href="#" className="underline">
