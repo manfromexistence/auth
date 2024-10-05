@@ -1,5 +1,7 @@
 # manfromexistence/auth
 
+Component fells odd in the navbar - if possible then will put anything else there.
+
 Accessible and customizable authentication components that you can copy and paste into your apps. Free. Open Source. **Use this to build your own component library**.
 
 ![hero](apps/www/public/og.jpg)
