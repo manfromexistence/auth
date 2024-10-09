@@ -17,3 +17,15 @@ Please read the [contributing guide](/CONTRIBUTING.md).
 ## License
 
 Licensed under the [MIT license](https://github.com/manformexistence/auth/blob/main/LICENSE.md).
+
+
+<!-- ```
+      {/* <PageHeader>
+        <Announcement />
+        <PageHeaderHeading>Build your authenticaton library</PageHeaderHeading>
+        <PageHeaderDescription>
+          Beautifully designed authenticaton components that you can copy and
+          paste into your apps.
+        </PageHeaderDescription>
+      </PageHeader> */}
+``` -->
