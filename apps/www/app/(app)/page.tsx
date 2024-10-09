@@ -3,6 +3,7 @@
 import React, { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { motion } from "framer-motion"
 import {
   Bot,
   Check,
@@ -55,17 +56,41 @@ import {
 } from "@/registry/new-york/ui/popover"
 
 export type IconProps = React.HTMLAttributes<SVGElement>
-
 const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, ...props }, ref) => {
+  ({ className, placeholder, ...props }, ref) => {
     const [showPassword, setShowPassword] = React.useState(false)
     const disabled =
       props.value === "" || props.value === undefined || props.disabled
+    // const words = "Staggered Letter Pull Up"
+    // const letters = words.split("")
 
+    // const pullupVariant = {
+    //   initial: { y: 100, opacity: 0 },
+    //   animate: (i: any) => ({
+    //     y: 0,
+    //     opacity: 1,
+    //     transition: {
+    //       delay: i * 0.05, // Delay each letter's animation by 0.05 seconds
+    //     },
+    //   }),
+    // }
+    // {letters.map((letter, i) => (
+    //   <motion.h1
+    //     key={i}
+    //     variants={pullupVariant}
+    //     initial="initial"
+    //     animate="animate"
+    //     custom={i}
+    //     className="text-center font-display text-4xl font-bold tracking-[-0.02em] drop-shadow-sm md:text-7xl md:leading-[5rem]"
+    //   >
+    //     {letter === " " ? <span>&nbsp;</span> : letter}
+    //   </motion.h1>
+    // ))}
+    
     return (
       <div className="relative">
         <Input
-          // placeholder={placeholder}
+          placeholder={placeholder ? placeholder : "password 1 👌"}
           type={showPassword ? "text" : "password"}
           className={cn("hide-password-toggle pr-10", className)}
           ref={ref}
@@ -383,9 +408,9 @@ export default function IndexPage() {
               type="password"
               required
             /> */}
-            <Label htmlFor="current_password">Current Password</Label>
+            <Label htmlFor="current_password">Password</Label>
             <PasswordInput
-              placeholder="password 👌"
+              placeholder="password ✅"
               id="current_password"
               value={currentPassword}
               onChange={(e) => setCurrentPassword(e.target.value)}
