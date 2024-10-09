@@ -10,6 +10,8 @@ import {
   Contact,
   Earth,
   EarthLock,
+  EyeIcon,
+  EyeOffIcon,
   Fingerprint,
   Gem,
   Key,
@@ -45,6 +47,7 @@ import {
   CommandItem,
   CommandList,
 } from "@/registry/new-york/ui/command"
+import { type InputProps } from "@/registry/new-york/ui/input"
 import {
   Popover,
   PopoverContent,
@@ -52,6 +55,54 @@ import {
 } from "@/registry/new-york/ui/popover"
 
 export type IconProps = React.HTMLAttributes<SVGElement>
+
+const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, ...props }, ref) => {
+    const [showPassword, setShowPassword] = React.useState(false)
+    const disabled =
+      props.value === "" || props.value === undefined || props.disabled
+
+    return (
+      <div className="relative">
+        <Input
+          // placeholder={placeholder}
+          type={showPassword ? "text" : "password"}
+          className={cn("hide-password-toggle pr-10", className)}
+          ref={ref}
+          {...props}
+        />
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+          onClick={() => setShowPassword((prev) => !prev)}
+          disabled={disabled}
+        >
+          {showPassword && !disabled ? (
+            <EyeIcon className="h-4 w-4" aria-hidden="true" />
+          ) : (
+            <EyeOffIcon className="h-4 w-4" aria-hidden="true" />
+          )}
+          <span className="sr-only">
+            {showPassword ? "Hide password" : "Show password"}
+          </span>
+        </Button>
+
+        {/* hides browsers password toggles */}
+        <style>{`
+					.hide-password-toggle::-ms-reveal,
+					.hide-password-toggle::-ms-clear {
+						visibility: hidden;
+						pointer-events: none;
+						display: none;
+					}
+				`}</style>
+      </div>
+    )
+  }
+)
+PasswordInput.displayName = "PasswordInput"
 
 function AuthOptions() {
   return (
@@ -282,6 +333,10 @@ export function Accents() {
 }
 
 export default function IndexPage() {
+  const [currentPassword, setCurrentPassword] = useState("")
+  const [password, setPassword] = useState("")
+  const [passwordConfirmation, setPasswordConfirmation] = useState("")
+
   return (
     <div className="container relative flex h-screen flex-col items-center justify-center">
       {/* <PageHeader>
@@ -292,7 +347,6 @@ export default function IndexPage() {
           paste into your apps.
         </PageHeaderDescription>
       </PageHeader> */}
-      
 
       {/* <div className="flex h-[90vh] w-full flex-col items-center justify-center rounded-md border lg:border"></div> */}
       <Card className="w-full max-w-[430px] space-x-1 p-0">
@@ -322,12 +376,20 @@ export default function IndexPage() {
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="password">Password</Label>
+            {/* <Label htmlFor="password">Password</Label>
             <Input
               placeholder="password 👌"
               id="password"
               type="password"
               required
+            /> */}
+            <Label htmlFor="current_password">Current Password</Label>
+            <PasswordInput
+              placeholder="password 👌"
+              id="current_password"
+              value={currentPassword}
+              onChange={(e) => setCurrentPassword(e.target.value)}
+              autoComplete="current-password"
             />
           </div>
         </CardContent>
