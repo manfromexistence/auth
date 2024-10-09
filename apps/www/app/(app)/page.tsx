@@ -54,6 +54,59 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/registry/new-york/ui/popover"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
+} from "@/registry/new-york/ui/carousel"
+
+export function CarouselDApiDemo() {
+  const [api, setApi] = React.useState<CarouselApi>()
+  const [current, setCurrent] = React.useState(0)
+  const [count, setCount] = React.useState(0)
+
+  React.useEffect(() => {
+    if (!api) {
+      return
+    }
+
+    setCount(api.scrollSnapList().length)
+    setCurrent(api.selectedScrollSnap() + 1)
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1)
+    })
+  }, [api])
+
+  return (
+    <div className="mx-auto max-w-xs">
+      <Carousel setApi={setApi} className="w-full max-w-xs">
+        <CarouselContent>
+          {Array.from({ length: 5 }).map((_, index) => (
+            <CarouselItem key={index}>
+              <Card>
+                <CardContent className="flex aspect-square items-center justify-center p-6">
+                  <span className="text-4xl font-semibold">{index + 1}</span>
+                </CardContent>
+              </Card>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
+      <div className="py-2 text-center text-sm text-muted-foreground">
+        Slide {current} of {count}
+      </div>
+    </div>
+  )
+}
+
+
+
 
 export type IconProps = React.HTMLAttributes<SVGElement>
 const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
@@ -86,7 +139,7 @@ const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
     //     {letter === " " ? <span>&nbsp;</span> : letter}
     //   </motion.h1>
     // ))}
-    
+
     return (
       <div className="relative">
         <Input
@@ -373,7 +426,6 @@ export default function IndexPage() {
         </PageHeaderDescription>
       </PageHeader> */}
 
-      {/* <div className="flex h-[90vh] w-full flex-col items-center justify-center rounded-md border lg:border"></div> */}
       <Card className="w-full max-w-[430px] space-x-1 p-0">
         <CardHeader>
           <Image
@@ -429,6 +481,7 @@ export default function IndexPage() {
           Sign up
         </Link>
       </div>
+      <CarouselDApiDemo />
     </div>
   )
 }
