@@ -3,7 +3,20 @@
 import React, { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Check, ChevronsUpDown, Earth, Fingerprint, Gem, Key, QrCode, Bot, Contact } from "lucide-react"
+import {
+  Bot,
+  Check,
+  ChevronsUpDown,
+  Contact,
+  Earth,
+  EarthLock,
+  Fingerprint,
+  Gem,
+  Key,
+  NotebookTabs,
+  QrCode,
+  Shapes,
+} from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Announcement } from "@/components/announcement"
@@ -48,7 +61,7 @@ function AuthOptions() {
           <Earth className="h-4 w-4" />
         </DockIcon>
         <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
-          <Gem className="h-4 w-4" />
+          <EarthLock className="h-4 w-4" />
         </DockIcon>
         <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
           <QrCode className="h-4 w-4" />
@@ -60,11 +73,14 @@ function AuthOptions() {
           <Fingerprint className="h-4 w-4" />
         </DockIcon>
         <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
-          <Bot className="h-4 w-4" />
+          <Shapes className="h-4 w-4" />
         </DockIcon>
         <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
-          <Contact className="h-4 w-4" />
+          <NotebookTabs className="h-4 w-4" />
         </DockIcon>
+        {/* <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+          <Contact className="h-4 w-4" />
+        </DockIcon>  */}
       </Dock>
     </div>
   )
@@ -267,16 +283,19 @@ export function Accents() {
 
 export default function IndexPage() {
   return (
-    <div className="container relative">
-      <PageHeader>
+    <div className="container relative flex h-screen flex-col items-center justify-center">
+      {/* <PageHeader>
         <Announcement />
         <PageHeaderHeading>Build your authenticaton library</PageHeaderHeading>
         <PageHeaderDescription>
           Beautifully designed authenticaton components that you can copy and
           paste into your apps.
         </PageHeaderDescription>
-      </PageHeader>
-      <Card className="mx-auto w-full max-w-sm space-x-1 p-0">
+      </PageHeader> */}
+      
+
+      {/* <div className="flex h-[90vh] w-full flex-col items-center justify-center rounded-md border lg:border"></div> */}
+      <Card className="w-full max-w-[430px] space-x-1 p-0">
         <CardHeader>
           <Image
             className="mx-auto rounded-full border"
@@ -285,7 +304,7 @@ export default function IndexPage() {
             width={85}
             height={85}
           />
-          <CardTitle className="w-full text-center text-2xl">Login</CardTitle>
+          <CardTitle className="w-full text-center text-4xl">Login</CardTitle>
           <CardDescription className="grid grid-cols-3 gap-2">
             <Languages />
             <Narrators />
@@ -325,4 +344,11 @@ export default function IndexPage() {
       </div>
     </div>
   )
+}
+
+{
+  /* <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+          <Bot className="h-4 w-4" />
+        </DockIcon>
+*/
 }
