@@ -1,11 +1,14 @@
+"use client"
+
+import React, { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { Check, ChevronsUpDown, Earth, Fingerprint, Gem, Key, QrCode, Bot, Contact } from "lucide-react"
 
-import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
 import { Announcement } from "@/components/announcement"
-import { ExamplesNav } from "@/components/examples-nav"
+import { Dock, DockIcon } from "@/components/dock"
 import {
-  PageActions,
   PageHeader,
   PageHeaderDescription,
   PageHeaderHeading,
@@ -21,15 +24,246 @@ import {
 import { Input } from "@/registry/default/ui/input"
 import { Label } from "@/registry/default/ui/label"
 import { Button } from "@/registry/new-york/ui/button"
-import MailPage from "@/app/(app)/examples/mail/page"
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/registry/new-york/ui/command"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/registry/new-york/ui/popover"
 
-export const description =
-  "A simple login form with email and password. The submit button says 'Sign in'."
+export type IconProps = React.HTMLAttributes<SVGElement>
 
-export const iframeHeight = "600px"
+function AuthOptions() {
+  return (
+    <div className="relative flex h-16 w-full items-center justify-center">
+      <Dock magnification={60} distance={100}>
+        <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+          <Earth className="h-4 w-4" />
+        </DockIcon>
+        <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+          <Gem className="h-4 w-4" />
+        </DockIcon>
+        <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+          <QrCode className="h-4 w-4" />
+        </DockIcon>
+        <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+          <Key className="h-4 w-4" />
+        </DockIcon>
+        <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+          <Fingerprint className="h-4 w-4" />
+        </DockIcon>
+        <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+          <Bot className="h-4 w-4" />
+        </DockIcon>
+        <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+          <Contact className="h-4 w-4" />
+        </DockIcon>
+      </Dock>
+    </div>
+  )
+}
 
-export const containerClassName =
-  "w-full h-screen flex items-center justify-center px-4"
+const languages = [
+  {
+    value: "eng",
+    label: "English",
+  },
+  {
+    value: "hd",
+    label: "Hindi",
+  },
+  {
+    value: "bn",
+    label: "Bangla",
+  },
+  {
+    value: "jp",
+    label: "Japanese",
+  },
+  {
+    value: "ar",
+    label: "Arabic",
+  },
+]
+const narrators = [
+  {
+    value: "jarvis",
+    label: "Jarvis",
+  },
+  {
+    value: "edit",
+    label: "Edit",
+  },
+]
+
+const accents = [
+  {
+    value: "captain jack sparow",
+    label: "Captain Jack Sparow",
+  },
+  {
+    value: "tony stark",
+    label: "Tony Stark",
+  },
+]
+
+export function Languages() {
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState("")
+
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          role="combobox"
+          aria-expanded={open}
+          className="justify-between"
+        >
+          {value
+            ? languages.find((languages) => languages.value === value)?.label
+            : "Lang..."}
+          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-[200px] p-0">
+        <Command>
+          <CommandInput placeholder="Search languages..." />
+          <CommandList>
+            <CommandEmpty>No languages found.</CommandEmpty>
+            <CommandGroup>
+              {languages.map((languages) => (
+                <CommandItem
+                  key={languages.value}
+                  value={languages.value}
+                  onSelect={(currentValue) => {
+                    setValue(currentValue === value ? "" : currentValue)
+                    setOpen(false)
+                  }}
+                >
+                  <Check
+                    className={cn(
+                      "mr-2 h-4 w-4",
+                      value === languages.value ? "opacity-100" : "opacity-0"
+                    )}
+                  />
+                  {languages.label}
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      </PopoverContent>
+    </Popover>
+  )
+}
+export function Narrators() {
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState("")
+
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          role="combobox"
+          aria-expanded={open}
+          className="justify-between truncate"
+        >
+          {value
+            ? narrators.find((narrators) => narrators.value === value)?.label
+            : "Narrators"}
+          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-[200px] p-0">
+        <Command>
+          <CommandInput placeholder="Search narrators..." />
+          <CommandList>
+            <CommandEmpty>No narrators found.</CommandEmpty>
+            <CommandGroup>
+              {narrators.map((narrators) => (
+                <CommandItem
+                  key={narrators.value}
+                  value={narrators.value}
+                  onSelect={(currentValue) => {
+                    setValue(currentValue === value ? "" : currentValue)
+                    setOpen(false)
+                  }}
+                >
+                  <Check
+                    className={cn(
+                      "mr-2 h-4 w-4",
+                      value === narrators.value ? "opacity-100" : "opacity-0"
+                    )}
+                  />
+                  {narrators.label}
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      </PopoverContent>
+    </Popover>
+  )
+}
+export function Accents() {
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState("")
+
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          role="combobox"
+          aria-expanded={open}
+          className="justify-between"
+        >
+          {value
+            ? accents.find((accents) => accents.value === value)?.label
+            : "Accents"}
+          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-[200px] p-0">
+        <Command>
+          <CommandInput placeholder="Search accents..." />
+          <CommandList>
+            <CommandEmpty>No accents found.</CommandEmpty>
+            <CommandGroup>
+              {accents.map((accents) => (
+                <CommandItem
+                  key={accents.value}
+                  value={accents.value}
+                  onSelect={(currentValue) => {
+                    setValue(currentValue === value ? "" : currentValue)
+                    setOpen(false)
+                  }}
+                >
+                  <Check
+                    className={cn(
+                      "mr-2 h-4 w-4",
+                      value === accents.value ? "opacity-100" : "opacity-0"
+                    )}
+                  />
+                  {accents.label}
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      </PopoverContent>
+    </Popover>
+  )
+}
 
 export default function IndexPage() {
   return (
@@ -42,11 +276,20 @@ export default function IndexPage() {
           paste into your apps.
         </PageHeaderDescription>
       </PageHeader>
-      {/* <Card className="mx-auto w-full max-w-sm">
+      <Card className="mx-auto w-full max-w-sm space-x-1 p-0">
         <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
-          <CardDescription>
-            Enter your details below to login to your account.
+          <Image
+            className="mx-auto rounded-full border"
+            src="/manfromexistence.png"
+            alt="Auth"
+            width={85}
+            height={85}
+          />
+          <CardTitle className="w-full text-center text-2xl">Login</CardTitle>
+          <CardDescription className="grid grid-cols-3 gap-2">
+            <Languages />
+            <Narrators />
+            <Accents />
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
@@ -55,23 +298,25 @@ export default function IndexPage() {
             <Input
               id="email"
               type="email"
-              placeholder="m@example.com"
+              placeholder="manfromexistence@example.com"
               required
             />
           </div>
           <div className="grid gap-2">
             <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" required />
+            <Input
+              placeholder="password 👌"
+              id="password"
+              type="password"
+              required
+            />
           </div>
         </CardContent>
         <CardFooter className="m-0 flex flex-col gap-2">
           <Button className="w-full">Sign in</Button>
-          <div className="w-full rounded-md border py-2">options</div>
+          <AuthOptions />
         </CardFooter>
-      </Card> */}
-      <div className="mx-auto w-full max-w-sm border rounded-md">
-        Auth
-      </div>
+      </Card>
       <div className="mt-4 text-center text-sm">
         Dont&apos;t have an account?{" "}
         <Link href="#" className="underline">
