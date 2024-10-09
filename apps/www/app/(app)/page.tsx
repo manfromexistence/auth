@@ -5,7 +5,6 @@ import {
   Card,
   CardContent,
 } from "@/registry/default/ui/card"
-
 import {
   Carousel,
   CarouselContent,
@@ -34,7 +33,7 @@ export default function IndexPage() {
   }, [api])
   return (
     <div className="container relative flex h-screen flex-col items-center justify-center">
-      {/* <Authentication05 /> */}
+      {/* <Authentication03 /> */}
       <div className="mx-auto max-w-xs">
         <Carousel setApi={setApi} className="w-full max-w-xs">
           <CarouselContent>
