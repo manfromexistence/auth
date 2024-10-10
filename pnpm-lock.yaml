@@ -228,9 +228,6 @@ importers:
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
-      embla-carousel:
-        specifier: ^8.3.0
-        version: 8.3.0
       embla-carousel-autoplay:
         specifier: 8.0.0-rc15
         version: 8.0.0-rc15(embla-carousel@8.3.0)
@@ -328,6 +325,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.2.22
         version: 18.2.22
+      embla-carousel:
+        specifier: ^8.3.0
+        version: 8.3.0
       esbuild:
         specifier: ^0.17.19
         version: 0.17.19
@@ -7745,7 +7745,7 @@ snapshots:
       '@types/node': 20.5.1
       chalk: 4.1.2
       cosmiconfig: 8.3.6(typescript@5.5.3)
-      cosmiconfig-typescript-loader: 4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@5.5.3))(ts-node@10.9.2(@types/node@20.11.27)(typescript@5.5.3))(typescript@5.5.3)
+      cosmiconfig-typescript-loader: 4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@5.5.3))(ts-node@10.9.2(@types/node@20.5.1)(typescript@5.5.3))(typescript@5.5.3)
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
@@ -10450,7 +10450,7 @@ snapshots:
 
   core-util-is@1.0.3: {}
 
-  cosmiconfig-typescript-loader@4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@5.5.3))(ts-node@10.9.2(@types/node@20.11.27)(typescript@5.5.3))(typescript@5.5.3):
+  cosmiconfig-typescript-loader@4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@5.5.3))(ts-node@10.9.2(@types/node@20.5.1)(typescript@5.5.3))(typescript@5.5.3):
     dependencies:
       '@types/node': 20.5.1
       cosmiconfig: 8.3.6(typescript@5.5.3)
@@ -11005,6 +11005,17 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
+  eslint-module-utils@2.8.1(@typescript-eslint/parser@5.61.0(eslint@8.44.0)(typescript@5.5.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@2.7.1(eslint-plugin-import@2.29.1)(eslint@8.44.0))(eslint@8.44.0):
+    dependencies:
+      debug: 3.2.7
+    optionalDependencies:
+      '@typescript-eslint/parser': 5.61.0(eslint@8.44.0)(typescript@5.5.3)
+      eslint: 8.44.0
+      eslint-import-resolver-node: 0.3.9
+      eslint-import-resolver-typescript: 2.7.1(eslint-plugin-import@2.29.1)(eslint@8.44.0)
+    transitivePeerDependencies:
+      - supports-color
+
   eslint-module-utils@2.8.1(@typescript-eslint/parser@5.61.0(eslint@8.44.0)(typescript@5.5.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@5.61.0(eslint@8.44.0)(typescript@5.5.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.44.0))(eslint@8.44.0):
     dependencies:
       debug: 3.2.7
@@ -11026,7 +11037,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 8.44.0
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.8.1(@typescript-eslint/parser@5.61.0(eslint@8.44.0)(typescript@5.5.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@5.61.0(eslint@8.44.0)(typescript@5.5.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.44.0))(eslint@8.44.0)
+      eslint-module-utils: 2.8.1(@typescript-eslint/parser@5.61.0(eslint@8.44.0)(typescript@5.5.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@2.7.1(eslint-plugin-import@2.29.1)(eslint@8.44.0))(eslint@8.44.0)
       hasown: 2.0.2
       is-core-module: 2.13.1
       is-glob: 4.0.3
