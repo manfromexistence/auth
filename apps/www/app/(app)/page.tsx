@@ -13,6 +13,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/registry/new-york/ui/carousel"
+import Authentication03 from "@/components/authentication-03"
 
 export default function IndexPage() {
   const [api, setApi] = React.useState<CarouselApi>()
@@ -33,11 +34,10 @@ export default function IndexPage() {
   }, [api])
   return (
     <div className="container relative flex h-screen flex-col items-center justify-center">
-      {/* <Authentication03 /> */}
       <div className="mx-auto max-w-xs">
         <Carousel setApi={setApi} className="w-full max-w-xs">
           <CarouselContent>
-            {Array.from({ length: 5 }).map((_, index) => (
+            {/* {Array.from({ length: 5 }).map((_, index) => (
               <CarouselItem key={index}>
                 <Card>
                   <CardContent className="flex aspect-square items-center justify-center p-6">
@@ -45,7 +45,16 @@ export default function IndexPage() {
                   </CardContent>
                 </Card>
               </CarouselItem>
-            ))}
+            ))} */}
+            <CarouselItem >
+              <Authentication03 />
+            </CarouselItem>
+            <CarouselItem >
+              <Authentication03 />
+            </CarouselItem>
+            <CarouselItem >
+              <Authentication03 />
+            </CarouselItem>
           </CarouselContent>
           <CarouselPrevious />
           <CarouselNext />

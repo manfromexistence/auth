@@ -313,7 +313,7 @@ export default function Authentication03() {
           <div className="grid gap-2">
             <Label htmlFor="current_password">Password</Label>
             <PasswordInput
-              placeholder="password ✅"
+              placeholder="password"
               id="current_password"
               value={currentPassword}
               onChange={(e) => setCurrentPassword(e.target.value)}
