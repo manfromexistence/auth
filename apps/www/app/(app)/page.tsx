@@ -34,18 +34,9 @@ export default function IndexPage() {
   }, [api])
   return (
     <div className="container relative flex h-screen flex-col items-center justify-center">
-      <div className="mx-auto max-w-xs">
+      {/* <div className="mx-auto max-w-xs">
         <Carousel setApi={setApi} className="w-full max-w-xs">
           <CarouselContent>
-            {/* {Array.from({ length: 5 }).map((_, index) => (
-              <CarouselItem key={index}>
-                <Card>
-                  <CardContent className="flex aspect-square items-center justify-center p-6">
-                    <span className="text-4xl font-semibold">{index + 1}</span>
-                  </CardContent>
-                </Card>
-              </CarouselItem>
-            ))} */}
             <CarouselItem >
               <Authentication03 />
             </CarouselItem>
@@ -62,7 +53,8 @@ export default function IndexPage() {
         <div className="py-2 text-center text-sm text-muted-foreground">
           Slide {current} of {count}
         </div>
-      </div>
+      </div> */}
+      <Authentication03 />
     </div>
   )
 }

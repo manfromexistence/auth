@@ -284,7 +284,7 @@ export default function Authentication03() {
 
   return (
     <>
-      <Card className="w-full max-w-[430px] space-x-1 p-0">
+      <Card className="w-full max-w-[400px] space-x-1 p-0">
         <CardHeader>
           <Image
             className="mx-auto rounded-full border"
