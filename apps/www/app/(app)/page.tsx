@@ -33,9 +33,9 @@ export default function IndexPage() {
     })
   }, [api])
   return (
-    <div className="container relative flex h-screen flex-col items-center justify-center">
-      {/* <div className="mx-auto max-w-xs">
-        <Carousel setApi={setApi} className="w-full max-w-xs">
+    <div className="container relative">
+      <div className="w-full">
+        <Carousel setApi={setApi} className="flex h-[85vh] w-full items-center justify-center">
           <CarouselContent>
             <CarouselItem >
               <Authentication03 />
@@ -47,14 +47,13 @@ export default function IndexPage() {
               <Authentication03 />
             </CarouselItem>
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          {/* <CarouselPrevious />
+          <CarouselNext /> */}
         </Carousel>
         <div className="py-2 text-center text-sm text-muted-foreground">
           Slide {current} of {count}
         </div>
-      </div> */}
-      <Authentication03 />
+      </div>
     </div>
   )
 }
