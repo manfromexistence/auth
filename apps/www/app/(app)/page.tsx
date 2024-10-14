@@ -48,7 +48,7 @@ export default function IndexPage() {
               <Authentication03 />
             </CarouselItem>
           </CarouselContent>
-          <div className="absolute bottom-4 left-0 grid w-full grid-cols-3">
+          {/* <div className="absolute bottom-4 left-0 grid w-full grid-cols-3">
             <div>
               <CopyButton value={"auth"} />
             </div>
@@ -60,14 +60,11 @@ export default function IndexPage() {
                 <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-red-600 to-violet-600 opacity-25 blur transition duration-1000 group-hover:opacity-100 group-hover:duration-200"></div>
                 <div className="items-top relative flex h-3.5 w-3.5 justify-start space-x-6 rounded-full border-[3px] border-primary leading-none ring-1 ring-gray-900/5"></div>
               </div>
-              {/* <div className="hover-bg-primary h-3.5 w-3.5 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div> */}
             </div>
             <span className="rounded-sm bg-primary-foreground p-2 text-xs text-primary">
               npx shadcn manfromexistence/auth
             </span>
-          </div>
-          {/* <CarouselPrevious />
-          <CarouselNext /> */}
+          </div> */}
         </Carousel>
 
       </div>

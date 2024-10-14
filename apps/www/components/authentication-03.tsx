@@ -290,15 +290,15 @@ export default function Authentication03() {
             className="mx-auto rounded-full border"
             src="/manfromexistence.png"
             alt="Auth"
-            width={85}
-            height={85}
+            width={75}
+            height={75}
           />
-          <CardTitle className="w-full text-center text-4xl">Login</CardTitle>
-          <CardDescription className="grid grid-cols-3 gap-2">
+          <CardTitle className="w-full text-center text-3xl">Login</CardTitle>
+          {/* <CardDescription className="grid grid-cols-3 gap-2">
             <Languages />
             <Narrators />
             <Accents />
-          </CardDescription>
+          </CardDescription> */}
         </CardHeader>
         <CardContent className="grid gap-4">
           <div className="grid gap-2">
