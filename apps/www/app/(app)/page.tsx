@@ -53,14 +53,14 @@ export default function IndexPage() {
               <CopyButton value={"auth"} />
             </div>
             <div className="flex w-full items-center justify-center space-x-2">
-              <div className="hover-bg-primary h-4 w-4 rounded-full border-4 border-primary"></div>
-              <div className="hover-bg-primary h-4 w-4 rounded-full border-4 border-primary"></div>
-              <div className="hover-bg-primary h-4 w-4 rounded-full border-4 border-primary"></div>
+              <div className="hover-bg-primary h-3.5 w-3.5 rounded-full border-[3px] border-primary"></div>
+              <div className="hover-bg-primary h-3.5 w-3.5 rounded-full border-[3px] border-primary"></div>
+              <div className="hover-bg-primary h-3.5 w-3.5 rounded-full border-[3px] border-primary"></div>
               <div className="group relative cursor-pointer ">
                 <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-red-600 to-violet-600 opacity-25 blur transition duration-1000 group-hover:opacity-100 group-hover:duration-200"></div>
-                <div className="items-top relative flex h-4 w-4 justify-start space-x-6 rounded-full border-4 border-primary leading-none ring-1 ring-gray-900/5"></div>
+                <div className="items-top relative flex h-3.5 w-3.5 justify-start space-x-6 rounded-full border-[3px] border-primary leading-none ring-1 ring-gray-900/5"></div>
               </div>
-              {/* <div className="hover-bg-primary h-4 w-4 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div> */}
+              {/* <div className="hover-bg-primary h-3.5 w-3.5 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div> */}
             </div>
             <span className="rounded-sm bg-primary-foreground p-2 text-xs text-primary">
               npx shadcn manfromexistence/auth
