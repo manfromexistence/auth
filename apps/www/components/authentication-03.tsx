@@ -64,44 +64,6 @@ import {
 } from "@/registry/default/ui/command"
 import * as TabsPrimitive from "@radix-ui/react-tabs"
 
-
-// function AuthOptions() {
-//   return (
-//     <div className="relative flex h-16 w-full items-center justify-center">
-//       <Dock magnification={60} distance={100}>
-//         <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
-//           <Earth className="h-4 w-4" />
-//         </DockIcon>
-//         <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
-//           <EarthLock className="h-4 w-4" />
-//         </DockIcon>
-//         <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
-//           <QrCode className="h-4 w-4" />
-//         </DockIcon>
-//         <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
-//           <Key className="h-4 w-4" />
-//         </DockIcon>
-//         <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
-//           <Fingerprint className="h-4 w-4" />
-//         </DockIcon>
-//         <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
-//           <Shapes className="h-4 w-4" />
-//         </DockIcon>
-//         <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
-//           <NotebookTabs className="h-4 w-4" />
-//         </DockIcon>
-//         <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
-//           <Contact className="h-4 w-4" />
-//         </DockIcon> 
-//       </Dock>
-//     </div>
-//   )
-// }
-
-
-
-
-
 export interface DockProps extends VariantProps<typeof dockVariants> {
   className?: string;
   magnification?: number;
@@ -117,6 +79,19 @@ const dockVariants = cva(
   "supports-backdrop-blur:bg-white/10 supports-backdrop-blur:dark:bg-black/10 mx-auto flex h-[58px] w-full items-center justify-center gap-2 rounded-2xl border p-2 backdrop-blur-md",
 );
 
+export interface DockIconProps {
+  size?: number;
+  magnification?: number;
+  distance?: number;
+  mouseX?: any;
+  className?: string;
+  children?: React.ReactNode;
+  props?: PropsWithChildren;
+}
+
+// export { Dock, DockIcon, dockVariants };
+
+const Tabs = TabsPrimitive.Root
 const Dock = React.forwardRef<HTMLDivElement, DockProps>(
   (
     {
@@ -165,15 +140,63 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
 
 Dock.displayName = "Dock";
 
-export interface DockIconProps {
-  size?: number;
-  magnification?: number;
-  distance?: number;
-  mouseX?: any;
-  className?: string;
-  children?: React.ReactNode;
-  props?: PropsWithChildren;
-}
+const TabsList = React.forwardRef<HTMLDivElement, DockProps>((
+  {
+    className,
+    children,
+    magnification = DEFAULT_MAGNIFICATION,
+    distance = DEFAULT_DISTANCE,
+    direction = "bottom",
+    ...props
+  },
+  ref,
+) => {
+  const mouseX = useMotionValue(Infinity);
+
+  const renderChildren = () => {
+    return React.Children.map(children, (child) => {
+      if (React.isValidElement(child) && child.type === DockIcon) {
+        return React.cloneElement(child, {
+          ...child.props,
+          mouseX: mouseX,
+          magnification: magnification,
+          distance: distance,
+        });
+      }
+      return child;
+    });
+  };
+
+  return (
+
+    <motion.div
+      ref={ref}
+      onMouseMove={(e) => mouseX.set(e.pageX)}
+      onMouseLeave={() => mouseX.set(Infinity)}
+      {...props}
+      className={cn(dockVariants({ className }), {
+        "items-start": direction === "top",
+        "items-center": direction === "middle",
+        "items-end": direction === "bottom",
+      })}
+    >
+      <TabsPrimitive.List
+        ref={ref}
+        className={cn(
+          "inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground",
+          className
+        )}
+      >
+        {renderChildren()}
+      </TabsPrimitive.List>
+    </motion.div>
+
+  );
+},
+)
+TabsList.displayName = TabsPrimitive.List.displayName
+
+
 
 const DockIcon = ({
   size,
@@ -221,38 +244,60 @@ const DockIcon = ({
 
 DockIcon.displayName = "DockIcon";
 
-export { Dock, DockIcon, dockVariants };
+const TabsTrigger = React.forwardRef<any, any>(({
+  size,
+  magnification = DEFAULT_MAGNIFICATION,
+  distance = DEFAULT_DISTANCE,
+  mouseX,
+  className,
+  children,
+  ...props
+}, ref) => {
+  const dockRef = useRef<HTMLDivElement>(null);
 
-const Tabs = TabsPrimitive.Root
+  // const distanceCalc = useTransform(mouseX, (val: number) => {
+  //   const bounds = dockRef.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
 
-const TabsList = React.forwardRef<
-  React.ElementRef<typeof TabsPrimitive.List>,
-  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
->(({ className, ...props }, ref) => (
-  <TabsPrimitive.List
-    ref={ref}
-    className={cn(
-      "inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground",
-      className
-    )}
-    {...props}
-  />
-))
-TabsList.displayName = TabsPrimitive.List.displayName
+  //   return val - bounds.x - bounds.width / 2;
+  // });
 
-const TabsTrigger = React.forwardRef<
-  React.ElementRef<typeof TabsPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
->(({ className, ...props }, ref) => (
-  <TabsPrimitive.Trigger
-    ref={ref}
-    className={cn(
-      "inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
-      className
-    )}
-    {...props}
-  />
-))
+  // let widthSync = useTransform(
+  //   distanceCalc,
+  //   [-distance, 0, distance],
+  //   [40, magnification, 40],
+  // );
+
+  // let width = useSpring(widthSync, {
+  //   mass: 0.1,
+  //   stiffness: 150,
+  //   damping: 12,
+  // });
+
+  return (
+    <TabsPrimitive.Trigger
+
+      className={cn(
+        "inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
+        className
+      )}
+      {...props}
+    >
+      {/* <motion.div
+        ref={dockRef}
+        style={{ width }}
+        className={cn(
+          "flex aspect-square cursor-pointer items-center justify-center rounded-full",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </motion.div> */}
+    </TabsPrimitive.Trigger>
+
+  )
+});
+
 TabsTrigger.displayName = TabsPrimitive.Trigger.displayName
 
 const TabsContent = React.forwardRef<
@@ -386,8 +431,13 @@ export default function Authentication03() {
           </Card>
         </TabsContent>
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="account">Account</TabsTrigger>
-          <TabsTrigger value="password">Password</TabsTrigger>
+          {/* <TabsTrigger value="account"><DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+            <Contact className="h-4 w-4" />
+          </DockIcon></TabsTrigger> */}
+          <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+            <Contact className="h-4 w-4" />
+            <TabsTrigger value="account">Account</TabsTrigger>
+          </DockIcon>
         </TabsList>
       </Tabs>
       {/* <Card className="mx-auto max-w-[400px] space-x-1 p-0">
