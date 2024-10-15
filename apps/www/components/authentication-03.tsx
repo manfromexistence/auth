@@ -49,38 +49,38 @@ import {
 } from "@/registry/new-york/ui/popover"
 import PasswordInput from "./passwordinput"
 
-function AuthOptions() {
-  return (
-    <div className="relative flex h-16 w-full items-center justify-center">
-      <Dock magnification={60} distance={100}>
-        <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
-          <Earth className="h-4 w-4" />
-        </DockIcon>
-        <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
-          <EarthLock className="h-4 w-4" />
-        </DockIcon>
-        <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
-          <QrCode className="h-4 w-4" />
-        </DockIcon>
-        <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
-          <Key className="h-4 w-4" />
-        </DockIcon>
-        <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
-          <Fingerprint className="h-4 w-4" />
-        </DockIcon>
-        <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
-          <Shapes className="h-4 w-4" />
-        </DockIcon>
-        <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
-          <NotebookTabs className="h-4 w-4" />
-        </DockIcon>
-        {/* <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
-          <Contact className="h-4 w-4" />
-        </DockIcon>  */}
-      </Dock>
-    </div>
-  )
-}
+// function AuthOptions() {
+//   return (
+//     <div className="relative flex h-16 w-full items-center justify-center">
+//       <Dock magnification={60} distance={100}>
+//         <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+//           <Earth className="h-4 w-4" />
+//         </DockIcon>
+//         <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+//           <EarthLock className="h-4 w-4" />
+//         </DockIcon>
+//         <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+//           <QrCode className="h-4 w-4" />
+//         </DockIcon>
+//         <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+//           <Key className="h-4 w-4" />
+//         </DockIcon>
+//         <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+//           <Fingerprint className="h-4 w-4" />
+//         </DockIcon>
+//         <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+//           <Shapes className="h-4 w-4" />
+//         </DockIcon>
+//         <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+//           <NotebookTabs className="h-4 w-4" />
+//         </DockIcon>
+//         <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+//           <Contact className="h-4 w-4" />
+//         </DockIcon> 
+//       </Dock>
+//     </div>
+//   )
+// }
 
 const languages = [
   {
@@ -293,12 +293,58 @@ export default function Authentication03() {
             width={75}
             height={75}
           />
-          <CardTitle className="w-full text-center text-3xl">Login</CardTitle>
-          {/* <CardDescription className="grid grid-cols-3 gap-2">
-            <Languages />
-            <Narrators />
-            <Accents />
-          </CardDescription> */}
+          <CardTitle className="w-full text-center text-4xl">Login</CardTitle>
+          <CardDescription className="w-full text-center ">
+            Select your web2 provider to login to your account.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="grid gap-4">
+
+        </CardContent>
+        <CardFooter className="m-0 flex flex-col gap-2">
+          {/* <Button className="w-full">Sign in</Button> */}
+          <div className="relative flex h-16 w-full items-center justify-center">
+            <Dock magnification={60} distance={100}>
+              <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+                <Contact className="h-4 w-4" />
+              </DockIcon>
+              <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+                <EarthLock className="h-4 w-4" />
+              </DockIcon>
+              <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+                <QrCode className="h-4 w-4" />
+              </DockIcon>
+              <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+                <Key className="h-4 w-4" />
+              </DockIcon>
+              <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+                <Fingerprint className="h-4 w-4" />
+              </DockIcon>
+              <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+                <Shapes className="h-4 w-4" />
+              </DockIcon>
+              <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+                <NotebookTabs className="h-4 w-4" />
+              </DockIcon>
+            </Dock>
+          </div>
+        </CardFooter>
+      </Card>
+      {/* 
+      Email
+      <Card className="mx-auto max-w-[400px] space-x-1 p-0">
+        <CardHeader>
+          <Image
+            className="mx-auto rounded-full border"
+            src="/manfromexistence.png"
+            alt="Auth"
+            width={75}
+            height={75}
+          />
+          <CardTitle className="w-full text-center text-4xl">Login</CardTitle>
+          <CardDescription className="w-full text-center ">
+            Enter your email below to login to your account.
+          </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
           <div className="grid gap-2">
@@ -323,9 +369,33 @@ export default function Authentication03() {
         </CardContent>
         <CardFooter className="m-0 flex flex-col gap-2">
           <Button className="w-full">Sign in</Button>
-          <AuthOptions />
+    <div className="relative flex h-16 w-full items-center justify-center">
+      <Dock magnification={60} distance={100}>
+        <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+          <Earth className="h-4 w-4" />
+        </DockIcon>
+        <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+          <EarthLock className="h-4 w-4" />
+        </DockIcon>
+        <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+          <QrCode className="h-4 w-4" />
+        </DockIcon>
+        <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+          <Key className="h-4 w-4" />
+        </DockIcon>
+        <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+          <Fingerprint className="h-4 w-4" />
+        </DockIcon>
+        <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+          <Shapes className="h-4 w-4" />
+        </DockIcon>
+        <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
+          <NotebookTabs className="h-4 w-4" />
+        </DockIcon>
+      </Dock>
+    </div>
         </CardFooter>
-      </Card>
+      </Card> */}
       <div className="mt-4 text-center text-sm">
         Dont&apos;t have an account?{" "}
         <Link href="#" className="underline">
@@ -336,3 +406,10 @@ export default function Authentication03() {
   )
 }
 
+
+
+{/* <CardDescription className="grid grid-cols-3 gap-2">
+            <Languages />
+            <Narrators />
+            <Accents />
+          </CardDescription> */}
