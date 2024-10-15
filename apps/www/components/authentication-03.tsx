@@ -383,7 +383,7 @@ export default function Authentication03() {
 
   return (
     <>
-      <Tabs defaultValue="account" className="w-[400px] bg-red-500">
+      {/* <Tabs defaultValue="account" className="w-[400px] bg-red-500">
         <TabsContent value="account">
           <Card>
             <CardHeader>
@@ -431,16 +431,13 @@ export default function Authentication03() {
           </Card>
         </TabsContent>
         <TabsList className="grid w-full grid-cols-2">
-          {/* <TabsTrigger value="account"><DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
-            <Contact className="h-4 w-4" />
-          </DockIcon></TabsTrigger> */}
           <DockIcon className="rounded-full bg-primary-foreground hover:bg-secondary hover:text-secondary-foreground">
             <Contact className="h-4 w-4" />
             <TabsTrigger value="account">Account</TabsTrigger>
           </DockIcon>
         </TabsList>
-      </Tabs>
-      {/* <Card className="mx-auto max-w-[400px] space-x-1 p-0">
+      </Tabs> */}
+      <Card className="mx-auto max-w-[400px] space-x-1 p-0">
         <CardHeader>
           <Image
             className="mx-auto rounded-full border"
@@ -521,7 +518,7 @@ export default function Authentication03() {
             </Dock>
           </div>
         </CardFooter>
-      </Card> */}
+      </Card>
       {/* 
       Email
       <Card className="mx-auto max-w-[400px] space-x-1 p-0">
