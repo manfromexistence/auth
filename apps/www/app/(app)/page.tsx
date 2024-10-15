@@ -41,12 +41,6 @@ export default function IndexPage() {
             <CarouselItem >
               <Authentication03 />
             </CarouselItem>
-            {/* <CarouselItem >
-              <Authentication03 />
-            </CarouselItem>
-            <CarouselItem >
-              <Authentication03 />
-            </CarouselItem> */}
           </CarouselContent>
           {/* <div className="absolute bottom-4 left-0 grid w-full grid-cols-3">
             <div>
