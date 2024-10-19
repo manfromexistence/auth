@@ -62,15 +62,15 @@ import {
 } from "@/registry/default/ui/command"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/registry/default/ui/tabs"
 
-export default function Authentication03() {
+export default function Authentication() {
   const [currentPassword, setCurrentPassword] = useState("")
   const [password, setPassword] = useState("")
   const [passwordConfirmation, setPasswordConfirmation] = useState("")
 
   return (
     <>
-      <Tabs defaultValue="web2" className="w-[375px]">
-        <TabsContent value="web2">
+      <Tabs defaultValue="www" className="w-[375px]">
+        <TabsContent value="www">
           <Card className="mx-auto max-w-[400px] space-x-1 p-0">
             <CardHeader>
               <Image
@@ -108,10 +108,8 @@ export default function Authentication03() {
             </CardContent>
             <CardFooter className="m-0 flex flex-col gap-2">
               <Button className="w-full">Sign in</Button>
-
             </CardFooter>
           </Card>
-
         </TabsContent>
         <TabsContent value="web3">
           <Card className="mx-auto max-w-[400px] space-x-1 p-0">
@@ -125,10 +123,10 @@ export default function Authentication03() {
               />
               <CardTitle className="w-full text-center text-4xl">Login</CardTitle>
               <CardDescription className="w-full text-center ">
-                Select your web2 provider to login to your account.
+                Select your web3 provider.
               </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="px-4 py-0">
               <Command className="max-w-full rounded-lg border shadow-md">
                 <CommandInput placeholder="Type a provider or search..." />
                 <CommandList>
@@ -173,6 +171,9 @@ export default function Authentication03() {
           </Card>
         </TabsContent>
         <TabsList className="supports-backdrop-blur:bg-white/10 supports-backdrop-blur:dark:bg-black/10 mx-auto mt-2 flex h-[58px] w-full grid-cols-2 items-center justify-center gap-2 rounded-2xl border p-2 backdrop-blur-md">
+          <TabsTrigger value="www">
+            <NotebookTabs className="h-4 w-4" />
+          </TabsTrigger>
           <TabsTrigger value="web2">
             <Earth className="h-4 w-4" />
           </TabsTrigger>
@@ -191,9 +192,6 @@ export default function Authentication03() {
           <TabsTrigger value="pattern">
             <Shapes className="h-4 w-4" />
           </TabsTrigger>
-          <TabsTrigger value="qna">
-            <NotebookTabs className="h-4 w-4" />
-          </TabsTrigger>
         </TabsList>
       </Tabs>
       <div className="mt-4 text-center text-sm">
@@ -203,209 +201,5 @@ export default function Authentication03() {
         </Link>
       </div>
     </>
-  )
-}
-
-
-
-{/* <CardDescription className="grid grid-cols-3 gap-2">
-            <Languages />
-            <Narrators />
-            <Accents />
-          </CardDescription> */}
-
-
-const languages = [
-  {
-    value: "eng",
-    label: "English",
-  },
-  {
-    value: "hd",
-    label: "Hindi",
-  },
-  {
-    value: "bn",
-    label: "Bangla",
-  },
-  {
-    value: "jp",
-    label: "Japanese",
-  },
-  {
-    value: "ar",
-    label: "Arabic",
-  },
-]
-const narrators = [
-  {
-    value: "jarvis",
-    label: "Jarvis",
-  },
-  {
-    value: "edit",
-    label: "Edit",
-  },
-]
-
-const accents = [
-  {
-    value: "captain jack sparow",
-    label: "Captain Jack Sparow",
-  },
-  {
-    value: "tony stark",
-    label: "Tony Stark",
-  },
-]
-
-export function Languages() {
-  const [open, setOpen] = useState(false)
-  const [value, setValue] = useState("")
-
-  return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className="justify-between"
-        >
-          {value
-            ? languages.find((languages) => languages.value === value)?.label
-            : "Lang..."}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
-        <Command>
-          <CommandInput placeholder="Search languages..." />
-          <CommandList>
-            <CommandEmpty>No languages found.</CommandEmpty>
-            <CommandGroup>
-              {languages.map((languages) => (
-                <CommandItem
-                  key={languages.value}
-                  value={languages.value}
-                  onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue)
-                    setOpen(false)
-                  }}
-                >
-                  <Check
-                    className={cn(
-                      "mr-2 h-4 w-4",
-                      value === languages.value ? "opacity-100" : "opacity-0"
-                    )}
-                  />
-                  {languages.label}
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </CommandList>
-        </Command>
-      </PopoverContent>
-    </Popover>
-  )
-}
-export function Narrators() {
-  const [open, setOpen] = useState(false)
-  const [value, setValue] = useState("")
-
-  return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className="justify-between truncate"
-        >
-          {value
-            ? narrators.find((narrators) => narrators.value === value)?.label
-            : "Narrators"}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
-        <Command>
-          <CommandInput placeholder="Search narrators..." />
-          <CommandList>
-            <CommandEmpty>No narrators found.</CommandEmpty>
-            <CommandGroup>
-              {narrators.map((narrators) => (
-                <CommandItem
-                  key={narrators.value}
-                  value={narrators.value}
-                  onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue)
-                    setOpen(false)
-                  }}
-                >
-                  <Check
-                    className={cn(
-                      "mr-2 h-4 w-4",
-                      value === narrators.value ? "opacity-100" : "opacity-0"
-                    )}
-                  />
-                  {narrators.label}
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </CommandList>
-        </Command>
-      </PopoverContent>
-    </Popover>
-  )
-}
-export function Accents() {
-  const [open, setOpen] = useState(false)
-  const [value, setValue] = useState("")
-
-  return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className="justify-between"
-        >
-          {value
-            ? accents.find((accents) => accents.value === value)?.label
-            : "Accents"}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
-        <Command>
-          <CommandInput placeholder="Search accents..." />
-          <CommandList>
-            <CommandEmpty>No accents found.</CommandEmpty>
-            <CommandGroup>
-              {accents.map((accents) => (
-                <CommandItem
-                  key={accents.value}
-                  value={accents.value}
-                  onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue)
-                    setOpen(false)
-                  }}
-                >
-                  <Check
-                    className={cn(
-                      "mr-2 h-4 w-4",
-                      value === accents.value ? "opacity-100" : "opacity-0"
-                    )}
-                  />
-                  {accents.label}
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </CommandList>
-        </Command>
-      </PopoverContent>
-    </Popover>
   )
 }

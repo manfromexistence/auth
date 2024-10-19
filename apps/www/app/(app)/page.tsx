@@ -13,7 +13,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/registry/new-york/ui/carousel"
-import Authentication03 from "@/components/authentication-03"
+import Authentication from "@/components/authentication"
 import { CopyButton } from "@/components/copy-button"
 
 export default function IndexPage() {
@@ -39,7 +39,7 @@ export default function IndexPage() {
         <Carousel setApi={setApi} className="relative flex h-screen w-full select-none items-center justify-center">
           <CarouselContent>
             <CarouselItem >
-              <Authentication03 />
+              <Authentication />
             </CarouselItem>
           </CarouselContent>
           {/* <div className="absolute bottom-4 left-0 grid w-full grid-cols-3">
