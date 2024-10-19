@@ -110,6 +110,61 @@ export default function Authentication() {
             </CardFooter>
           </Card>
         </TabsContent>
+        <TabsContent value="web2">
+          <Card className="mx-auto max-w-[400px] space-x-1 p-0">
+            <CardHeader>
+              <Image
+                className="mx-auto rounded-full border"
+                src="/manfromexistence.png"
+                alt="Auth"
+                width={75}
+                height={75}
+              />
+              <CardTitle className="w-full text-center text-4xl">Login</CardTitle>
+              <CardDescription className="w-full text-center ">
+                Select your web2 provider.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="px-4 py-0">
+              <Command className="max-w-full rounded-lg border shadow-md">
+                <CommandInput placeholder="Type a provider or search..." />
+                <CommandList>
+                  <CommandEmpty>No results found.</CommandEmpty>
+                  <CommandGroup heading="Suggestions">
+                    <CommandItem>
+                      <Calendar className="mr-2 h-4 w-4" />
+                      <span>Google</span>
+                    </CommandItem>
+                    <CommandItem>
+                      <Smile className="mr-2 h-4 w-4" />
+                      <span>X</span>
+                    </CommandItem>
+                  </CommandGroup>
+                  <CommandSeparator />
+                  <CommandGroup heading="More">
+                    <CommandItem>
+                      <User className="mr-2 h-4 w-4" />
+                      <span>Profile</span>
+                      <CommandShortcut>⌘P</CommandShortcut>
+                    </CommandItem>
+                    <CommandItem>
+                      <CreditCard className="mr-2 h-4 w-4" />
+                      <span>Billing</span>
+                      <CommandShortcut>⌘B</CommandShortcut>
+                    </CommandItem>
+                    <CommandItem>
+                      <Settings className="mr-2 h-4 w-4" />
+                      <span>Settings</span>
+                      <CommandShortcut>⌘S</CommandShortcut>
+                    </CommandItem>
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            </CardContent>
+            <CardFooter className="m-0 flex flex-col gap-2">
+            </CardFooter>
+          </Card>
+        </TabsContent>
         <TabsContent value="web3">
           <Card className="mx-auto max-w-[400px] space-x-1 p-0">
             <CardHeader>
