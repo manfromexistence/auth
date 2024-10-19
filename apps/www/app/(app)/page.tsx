@@ -60,7 +60,6 @@ export default function IndexPage() {
             </span>
           </div> */}
         </Carousel>
-
       </div>
     </div>
   )

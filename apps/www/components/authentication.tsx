@@ -66,7 +66,6 @@ export default function Authentication() {
   const [currentPassword, setCurrentPassword] = useState("")
   const [password, setPassword] = useState("")
   const [passwordConfirmation, setPasswordConfirmation] = useState("")
-
   return (
     <>
       <Tabs defaultValue="www" className="w-[375px]">
