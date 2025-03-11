@@ -1,37 +1,37 @@
-import { Box, Typography } from '@mui/material';
-import { Route, Routes, useLocation } from 'react-router-dom';
-import { useAccount } from '../../hooks/useAccount.js';
-import { useNavigateBack } from '../../hooks/useNavigateBack.js';
-import { useWidgetConfig } from '../../providers/WidgetProvider/WidgetProvider.js';
-import { useHeaderStore } from '../../stores/header/useHeaderStore.js';
-import { HiddenUI } from '../../types/widget.js';
+import { useAccount } from '@lifi/wallet-management'
+import { Box, Typography } from '@mui/material'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import { useNavigateBack } from '../../hooks/useNavigateBack.js'
+import { useWidgetConfig } from '../../providers/WidgetProvider/WidgetProvider.js'
+import { useHeaderStore } from '../../stores/header/useHeaderStore.js'
+import { HiddenUI } from '../../types/widget.js'
 import {
   backButtonRoutes,
   navigationRoutes,
   navigationRoutesValues,
-} from '../../utils/navigationRoutes.js';
-import { BackButton } from './BackButton.js';
-import { CloseDrawerButton } from './CloseDrawerButton.js';
-import { HeaderAppBar, HeaderControlsContainer } from './Header.style.js';
-import { NavigationTabs } from './NavigationTabs.js';
-import { SettingsButton } from './SettingsButton.js';
-import { TransactionHistoryButton } from './TransactionHistoryButton.js';
-import { SplitWalletMenuButton } from './WalletHeader.js';
+} from '../../utils/navigationRoutes.js'
+import { BackButton } from './BackButton.js'
+import { CloseDrawerButton } from './CloseDrawerButton.js'
+import { HeaderAppBar, HeaderControlsContainer } from './Header.style.js'
+import { NavigationTabs } from './NavigationTabs.js'
+import { SettingsButton } from './SettingsButton.js'
+import { TransactionHistoryButton } from './TransactionHistoryButton.js'
+import { SplitWalletMenuButton } from './WalletHeader.js'
 
 export const NavigationHeader: React.FC = () => {
-  const { subvariant, hiddenUI, variant } = useWidgetConfig();
-  const { navigateBack } = useNavigateBack();
-  const { account } = useAccount();
-  const { element, title } = useHeaderStore((state) => state);
-  const { pathname } = useLocation();
+  const { subvariant, hiddenUI, variant } = useWidgetConfig()
+  const { navigateBack } = useNavigateBack()
+  const { account } = useAccount()
+  const { element, title } = useHeaderStore((state) => state)
+  const { pathname } = useLocation()
 
   const cleanedPathname = pathname.endsWith('/')
     ? pathname.slice(0, -1)
-    : pathname;
-  const path = cleanedPathname.substring(cleanedPathname.lastIndexOf('/') + 1);
-  const hasPath = navigationRoutesValues.includes(path);
+    : pathname
+  const path = cleanedPathname.substring(cleanedPathname.lastIndexOf('/') + 1)
+  const hasPath = navigationRoutesValues.includes(path)
 
-  const splitSubvariant = subvariant === 'split' && !hasPath;
+  const splitSubvariant = subvariant === 'split' && !hasPath
 
   return (
     <>
@@ -40,16 +40,22 @@ export const NavigationHeader: React.FC = () => {
           <BackButton onClick={navigateBack} />
         ) : null}
         {splitSubvariant ? (
-          <Box flex={1}>
+          <Box
+            sx={{
+              flex: 1,
+            }}
+          >
             <SplitWalletMenuButton />
           </Box>
         ) : (
           <Typography
-            fontSize={hasPath ? 18 : 24}
             align={hasPath ? 'center' : 'left'}
-            fontWeight="700"
-            flex={1}
             noWrap
+            sx={{
+              fontSize: hasPath ? 18 : 24,
+              fontWeight: '700',
+              flex: 1,
+            }}
           >
             {title}
           </Typography>
@@ -71,10 +77,22 @@ export const NavigationHeader: React.FC = () => {
               </HeaderControlsContainer>
             }
           />
-          <Route path="*" element={element || <Box width={28} height={40} />} />
+          <Route
+            path="*"
+            element={
+              element || (
+                <Box
+                  sx={{
+                    width: 28,
+                    height: 40,
+                  }}
+                />
+              )
+            }
+          />
         </Routes>
       </HeaderAppBar>
       {splitSubvariant ? <NavigationTabs /> : null}
     </>
-  );
-};
+  )
+}

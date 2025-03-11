@@ -1,4 +1,4 @@
-import type { ChainId, ExtendedChain } from '@lifi/types'
+import { ChainId, type ChainType, type ExtendedChain } from '@lifi/types'
 import type { SDKProvider } from './core/types.js'
 import type { RPCUrls, SDKBaseConfig, SDKConfig } from './types/internal.js'
 
@@ -10,6 +10,7 @@ export const config = (() => {
     chains: [],
     providers: [],
     preloadChains: true,
+    debug: false,
   }
   let _loading: Promise<void> | undefined
   return {
@@ -33,11 +34,16 @@ export const config = (() => {
       }
       return _config
     },
+    getProvider(type: ChainType) {
+      return _config.providers.find((provider) => provider.type === type)
+    },
     setProviders(providers: SDKProvider[]) {
       const providerMap = new Map(
         _config.providers.map((provider) => [provider.type, provider])
       )
-      providers.forEach((provider) => providerMap.set(provider.type, provider))
+      for (const provider of providers) {
+        providerMap.set(provider.type, provider)
+      }
       _config.providers = Array.from(providerMap.values())
     },
     setChains(chains: ExtendedChain[]) {
@@ -47,7 +53,7 @@ export const config = (() => {
         }
         return rpcUrls
       }, {} as RPCUrls)
-      this.setRPCUrls(rpcUrls)
+      this.setRPCUrls(rpcUrls, [ChainId.SOL])
       _config.chains = chains
       _loading = undefined
     },
@@ -67,20 +73,20 @@ export const config = (() => {
       }
       return chain
     },
-    setRPCUrls(rpcUrls: RPCUrls) {
+    setRPCUrls(rpcUrls: RPCUrls, skipChains?: ChainId[]) {
       for (const rpcUrlsKey in rpcUrls) {
-        const chainId = rpcUrlsKey as unknown as ChainId
+        const chainId = Number(rpcUrlsKey) as ChainId
         const urls = rpcUrls[chainId]
         if (!urls?.length) {
           continue
         }
         if (!_config.rpcUrls[chainId]?.length) {
           _config.rpcUrls[chainId] = Array.from(urls)
-        } else {
+        } else if (!skipChains?.includes(chainId)) {
           const filteredUrls = urls.filter(
             (url) => !_config.rpcUrls[chainId]?.includes(url)
           )
-          _config.rpcUrls[chainId]?.push(...filteredUrls)
+          _config.rpcUrls[chainId].push(...filteredUrls)
         }
       }
     },

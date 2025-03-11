@@ -1,19 +1,24 @@
-import type { LiFiStepExtended } from '@lifi/sdk';
-import { LinkRounded, Wallet } from '@mui/icons-material';
-import { Box, Link, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
-import { CardIconButton } from '../Card/CardIconButton.js';
-import { CircularIcon } from './CircularProgress.style.js';
+import type { LiFiStepExtended } from '@lifi/sdk'
+import { LinkRounded, Wallet } from '@mui/icons-material'
+import { Box, Link, Typography } from '@mui/material'
+import { useTranslation } from 'react-i18next'
+import { CardIconButton } from '../Card/CardIconButton.js'
+import { CircularIcon } from './CircularProgress.style.js'
 
 export const DestinationWalletAddress: React.FC<{
-  step: LiFiStepExtended;
-  toAddress: string;
-  toAddressLink: string;
+  step: LiFiStepExtended
+  toAddress: string
+  toAddressLink: string
 }> = ({ step, toAddress, toAddressLink }) => {
-  const { t } = useTranslation();
-  const isDone = step.execution?.status === 'DONE';
+  const { t } = useTranslation()
+  const isDone = step.execution?.status === 'DONE'
   return (
-    <Box px={2} py={1}>
+    <Box
+      sx={{
+        px: 2,
+        py: 1,
+      }}
+    >
       <Box
         sx={{
           display: 'flex',
@@ -29,7 +34,14 @@ export const DestinationWalletAddress: React.FC<{
             }}
           />
         </CircularIcon>
-        <Typography mx={2} flex={1} fontSize={14} fontWeight={400}>
+        <Typography
+          sx={{
+            mx: 2,
+            flex: 1,
+            fontSize: 14,
+            fontWeight: 400,
+          }}
+        >
           {isDone
             ? t('main.sentToAddress', {
                 address: toAddress,
@@ -49,5 +61,5 @@ export const DestinationWalletAddress: React.FC<{
         </CardIconButton>
       </Box>
     </Box>
-  );
-};
+  )
+}

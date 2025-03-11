@@ -1,73 +1,84 @@
-/* eslint-disable react/no-array-index-key */
-import type { LiFiStepExtended, TokenAmount } from '@lifi/sdk';
-import { Box } from '@mui/material';
-import { useTranslation } from 'react-i18next';
-import { Card } from '../../components/Card/Card.js';
-import { CardTitle } from '../../components/Card/CardTitle.js';
-import { StepActions } from '../../components/StepActions/StepActions.js';
-import { Token } from '../../components/Token/Token.js';
-import { useExplorer } from '../../hooks/useExplorer.js';
-import { useWidgetConfig } from '../../providers/WidgetProvider/WidgetProvider.js';
-import { shortenAddress } from '../../utils/wallet.js';
-import { DestinationWalletAddress } from './DestinationWalletAddress.js';
-import { StepProcess } from './StepProcess.js';
-import { StepTimer } from './StepTimer.js';
+import type { LiFiStepExtended, TokenAmount } from '@lifi/sdk'
+import { Box } from '@mui/material'
+import { useTranslation } from 'react-i18next'
+import { Card } from '../../components/Card/Card.js'
+import { CardTitle } from '../../components/Card/CardTitle.js'
+import { StepActions } from '../../components/StepActions/StepActions.js'
+import { Token } from '../../components/Token/Token.js'
+import { useExplorer } from '../../hooks/useExplorer.js'
+import { useWidgetConfig } from '../../providers/WidgetProvider/WidgetProvider.js'
+import { shortenAddress } from '../../utils/wallet.js'
+import { StepTimer } from '../Timer/StepTimer.js'
+import { DestinationWalletAddress } from './DestinationWalletAddress.js'
+import { StepProcess } from './StepProcess.js'
 
 export const Step: React.FC<{
-  step: LiFiStepExtended;
-  fromToken?: TokenAmount;
-  toToken?: TokenAmount;
-  impactToken?: TokenAmount;
-  toAddress?: string;
+  step: LiFiStepExtended
+  fromToken?: TokenAmount
+  toToken?: TokenAmount
+  impactToken?: TokenAmount
+  toAddress?: string
 }> = ({ step, fromToken, toToken, impactToken, toAddress }) => {
-  const { t } = useTranslation();
-  const { subvariant, subvariantOptions } = useWidgetConfig();
-  const { getAddressLink } = useExplorer();
+  const { t } = useTranslation()
+  const { subvariant, subvariantOptions } = useWidgetConfig()
+  const { getAddressLink } = useExplorer()
   const stepHasError = step.execution?.process.some(
-    (process) => process.status === 'FAILED',
-  );
+    (process) => process.status === 'FAILED'
+  )
 
   const getCardTitle = () => {
+    const hasBridgeStep = step.includedSteps.some(
+      (step) => step.type === 'cross'
+    )
+    const hasSwapStep = step.includedSteps.some((step) => step.type === 'swap')
+    const hasCustomStep = step.includedSteps.some(
+      (step) => step.type === 'custom'
+    )
+
+    const isCustomVariant = hasCustomStep && subvariant === 'custom'
+
     switch (step.type) {
-      case 'lifi':
-        const hasBridgeStep = step.includedSteps.some(
-          (step) => step.type === 'cross',
-        );
-        const hasSwapStep = step.includedSteps.some(
-          (step) => step.type === 'swap',
-        );
+      case 'lifi': {
         if (hasBridgeStep && hasSwapStep) {
-          return subvariant === 'custom'
+          return isCustomVariant
             ? subvariantOptions?.custom === 'deposit'
               ? t('main.stepBridgeAndDeposit')
               : t('main.stepBridgeAndBuy')
-            : t('main.stepSwapAndBridge');
+            : t('main.stepSwapAndBridge')
         }
         if (hasBridgeStep) {
-          return subvariant === 'custom'
+          return isCustomVariant
             ? subvariantOptions?.custom === 'deposit'
               ? t('main.stepBridgeAndDeposit')
               : t('main.stepBridgeAndBuy')
-            : t('main.stepBridge');
+            : t('main.stepBridge')
         }
-        return subvariant === 'custom'
+        if (hasSwapStep) {
+          return isCustomVariant
+            ? subvariantOptions?.custom === 'deposit'
+              ? t('main.stepSwapAndDeposit')
+              : t('main.stepSwapAndBuy')
+            : t('main.stepSwap')
+        }
+        return isCustomVariant
           ? subvariantOptions?.custom === 'deposit'
-            ? t('main.stepSwapAndDeposit')
-            : t('main.stepSwapAndBuy')
-          : t('main.stepSwap');
+            ? t('main.stepDeposit')
+            : t('main.stepBuy')
+          : t('main.stepSwap')
+      }
       default:
-        return subvariant === 'custom'
+        return isCustomVariant
           ? subvariantOptions?.custom === 'deposit'
-            ? t('main.stepSwapAndDeposit')
-            : t('main.stepSwapAndBuy')
-          : t('main.stepSwap');
+            ? t('main.stepDeposit')
+            : t('main.stepBuy')
+          : t('main.stepSwap')
     }
-  };
+  }
 
-  const formattedToAddress = shortenAddress(toAddress);
+  const formattedToAddress = shortenAddress(toAddress)
   const toAddressLink = toAddress
     ? getAddressLink(toAddress, step.action.toChainId)
-    : undefined;
+    : undefined
 
   return (
     <Card type={stepHasError ? 'error' : 'default'}>
@@ -82,7 +93,11 @@ export const Step: React.FC<{
           <StepTimer step={step} />
         </CardTitle>
       </Box>
-      <Box py={1}>
+      <Box
+        sx={{
+          py: 1,
+        }}
+      >
         {fromToken ? <Token token={fromToken} px={2} py={1} /> : null}
         <StepActions step={step} px={2} py={1} dense />
         {step.execution?.process.map((process, index) => (
@@ -106,5 +121,5 @@ export const Step: React.FC<{
         ) : null}
       </Box>
     </Card>
-  );
-};
+  )
+}

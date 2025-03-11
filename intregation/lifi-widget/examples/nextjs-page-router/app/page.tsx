@@ -1,5 +1,5 @@
-import { Widget } from '@/components/Widget';
-import type { WidgetConfig } from '@lifi/widget';
+import { Widget } from '@/components/Widget'
+import type { WidgetConfig } from '@lifi/widget'
 
 // NOTE: The WidgetSkeleton component can not be used currently in Next 13 with the App Router
 // as it currently produces some errors
@@ -11,15 +11,15 @@ export default function Home() {
     appearance: 'light',
     theme: {
       container: {
-        boxShadow: '0px 8px 32px rgba(0, 0, 0, 0.08)',
+        border: '1px solid rgb(234, 234, 234)',
         borderRadius: '16px',
       },
     },
-  } as Partial<WidgetConfig>;
+  } as Partial<WidgetConfig>
 
   return (
     <main>
       <Widget config={config} fallback={<p>loading...</p>} />
     </main>
-  );
+  )
 }

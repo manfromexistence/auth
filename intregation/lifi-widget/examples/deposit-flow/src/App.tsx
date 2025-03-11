@@ -1,24 +1,19 @@
-import type { ContractCall, WidgetConfig } from '@lifi/widget';
+import type { ContractCall, WidgetConfig } from '@lifi/widget'
 import {
   ChainType,
   CoinKey,
   DisabledUI,
   HiddenUI,
-  ItemPrice,
   LiFiWidget,
-} from '@lifi/widget';
-import { useMemo } from 'react';
+} from '@lifi/widget'
+import { useMemo } from 'react'
+import { DepositCard } from './components/DepositCard'
+import { contractTool } from './config'
 
-const depositAddress = '0xdde759c7cf032b1d0e633a7e9cfa6653d1911a22';
-const depositAmount = 5000000n;
+// EXAMPLE CONTRACT, DON'T DEPOSIT
+const depositAddress = '0x4bF3E32de155359D1D75e8B474b66848221142fc'
 
-export const contractTool = {
-  logoURI:
-    'https://github.com/lifinance/widget/assets/18644653/eb043a91-18ba-4da7-91c4-029a53a25989',
-  name: 'Immutable',
-};
-
-const contractCalls: ContractCall[] = [];
+const contractCalls: ContractCall[] = []
 
 export function App() {
   const widgetConfig: WidgetConfig = useMemo(() => {
@@ -30,24 +25,24 @@ export function App() {
       },
       subvariant: 'custom',
       subvariantOptions: { custom: 'deposit' },
-      integrator: 'Immutable',
+      integrator: 'ProtocolName',
       disabledUI: [DisabledUI.ToAddress],
       hiddenUI: [HiddenUI.Appearance, HiddenUI.Language],
       useRecommendedRoute: true,
       theme: {
         container: {
-          border: `1px solid rgb(234, 234, 234)`,
+          border: '1px solid rgb(234, 234, 234)',
           borderRadius: '16px',
         },
       },
-    };
-    return baseConfig;
-  }, []);
+    }
+    return baseConfig
+  }, [])
 
   return (
     <LiFiWidget
       contractComponent={
-        <ItemPrice
+        <DepositCard
           token={{
             chainId: 10,
             address: '0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85',
@@ -58,7 +53,6 @@ export function App() {
             coinKey: CoinKey.USDC,
             logoURI:
               'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png',
-            amount: depositAmount,
           }}
           contractCalls={contractCalls}
         />
@@ -67,5 +61,5 @@ export function App() {
       config={widgetConfig}
       integrator={widgetConfig.integrator}
     />
-  );
+  )
 }

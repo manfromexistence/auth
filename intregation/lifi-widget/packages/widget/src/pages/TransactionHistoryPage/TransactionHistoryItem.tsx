@@ -3,39 +3,38 @@ import type {
   FullStatusData,
   StatusResponse,
   TokenAmount,
-} from '@lifi/sdk';
-import { Box, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { Card } from '../../components/Card/Card.js';
-import { Token } from '../../components/Token/Token.js';
-import { TokenDivider } from '../../components/Token/Token.style.js';
-import { navigationRoutes } from '../../utils/navigationRoutes.js';
+} from '@lifi/sdk'
+import { Box, Typography } from '@mui/material'
+import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
+import { Card } from '../../components/Card/Card.js'
+import { Token } from '../../components/Token/Token.js'
+import { TokenDivider } from '../../components/Token/Token.style.js'
+import { navigationRoutes } from '../../utils/navigationRoutes.js'
 
 export const TransactionHistoryItem: React.FC<{
-  transaction: StatusResponse;
-  size: number;
-  start: number;
-}> = ({ transaction, size, start }) => {
-  const { i18n } = useTranslation();
-  const navigate = useNavigate();
+  transaction: StatusResponse
+  start: number
+}> = ({ transaction, start }) => {
+  const { i18n } = useTranslation()
+  const navigate = useNavigate()
 
-  const sending = transaction.sending as ExtendedTransactionInfo;
+  const sending = transaction.sending as ExtendedTransactionInfo
   const receiving = (transaction as FullStatusData)
-    .receiving as ExtendedTransactionInfo;
+    .receiving as ExtendedTransactionInfo
 
   const handleClick = () => {
     navigate(navigationRoutes.transactionDetails, {
       state: {
         transactionHash: (transaction as FullStatusData).sending.txHash,
       },
-    });
-  };
+    })
+  }
 
-  const startedAt = new Date((sending.timestamp ?? 0) * 1000);
+  const startedAt = new Date((sending.timestamp ?? 0) * 1000)
 
   if (!sending.token?.chainId || !receiving.token?.chainId) {
-    return null;
+    return null
   }
 
   const fromToken: TokenAmount = {
@@ -46,7 +45,7 @@ export const TransactionHistoryItem: React.FC<{
     decimals: sending.token?.decimals ?? 0,
     name: sending.token?.name ?? '',
     chainId: sending.token?.chainId,
-  };
+  }
 
   const toToken: TokenAmount = {
     ...receiving.token,
@@ -56,7 +55,7 @@ export const TransactionHistoryItem: React.FC<{
     decimals: receiving.token?.decimals ?? 0,
     name: receiving.token?.name ?? '',
     chainId: receiving.token?.chainId,
-  };
+  }
 
   return (
     <Card
@@ -72,29 +71,47 @@ export const TransactionHistoryItem: React.FC<{
     >
       <Box
         sx={{
+          pt: 1.75,
+          px: 2,
           display: 'flex',
           flex: 1,
           justifyContent: 'space-between',
         }}
-        pt={1.75}
-        px={2}
       >
-        <Typography fontSize={12}>
+        <Typography
+          sx={{
+            fontSize: 12,
+          }}
+        >
           {startedAt.toLocaleString(i18n.language, { dateStyle: 'long' })}
         </Typography>
-        <Typography fontSize={12}>
+        <Typography
+          sx={{
+            fontSize: 12,
+          }}
+        >
           {startedAt.toLocaleString(i18n.language, {
             timeStyle: 'short',
           })}
         </Typography>
       </Box>
-      <Box px={2} py={2}>
+      <Box
+        sx={{
+          px: 2,
+          py: 2,
+        }}
+      >
         <Token token={fromToken} />
-        <Box pl={2.375} py={0.5}>
+        <Box
+          sx={{
+            pl: 2.375,
+            py: 0.5,
+          }}
+        >
           <TokenDivider />
         </Box>
         <Token token={toToken} />
       </Box>
     </Card>
-  );
-};
+  )
+}

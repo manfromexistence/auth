@@ -1,6 +1,4 @@
 import {
-  isContractCallsRequestWithFromAmount,
-  isContractCallsRequestWithToAmount,
   type ChainId,
   type ChainKey,
   type ChainsRequest,
@@ -14,6 +12,14 @@ import {
   type GetStatusRequest,
   type LiFiStep,
   type QuoteRequest,
+  type RelayRequest,
+  type RelayResponse,
+  type RelayResponseData,
+  type RelayStatusRequest,
+  type RelayStatusResponse,
+  type RelayStatusResponseData,
+  type RelayerQuoteResponse,
+  type RelayerQuoteResponseData,
   type RequestOptions,
   type RoutesRequest,
   type RoutesResponse,
@@ -25,45 +31,17 @@ import {
   type ToolsResponse,
   type TransactionAnalyticsRequest,
   type TransactionAnalyticsResponse,
+  isContractCallsRequestWithFromAmount,
+  isContractCallsRequestWithToAmount,
 } from '@lifi/types'
 import { config } from '../config.js'
-import { ValidationError } from '../errors/errors.js'
 import { SDKError } from '../errors/SDKError.js'
+import { BaseError } from '../errors/baseError.js'
+import { ErrorName } from '../errors/constants.js'
+import { ValidationError } from '../errors/errors.js'
 import { request } from '../request.js'
 import { isRoutesRequest, isStep } from '../typeguards.js'
-/**
- * Fetch information about a Token
- * @param chain - Id or key of the chain that contains the token
- * @param token - Address or symbol of the token on the requested chain
- * @param options - Request options
- * @throws {LiFiError} - Throws a LiFiError if request fails
- * @returns Token information
- */
-export const getToken = async (
-  chain: ChainKey | ChainId,
-  token: string,
-  options?: RequestOptions
-): Promise<Token> => {
-  if (!chain) {
-    throw new SDKError(
-      new ValidationError('Required parameter "chain" is missing.')
-    )
-  }
-  if (!token) {
-    throw new SDKError(
-      new ValidationError('Required parameter "token" is missing.')
-    )
-  }
-  return await request<Token>(
-    `${config.get().apiUrl}/token?${new URLSearchParams({
-      chain,
-      token,
-    } as Record<string, string>)}`,
-    {
-      signal: options?.signal,
-    }
-  )
-}
+import { withDedupe } from '../utils/withDedupe.js'
 
 /**
  * Get a quote for a token transfer
@@ -84,7 +62,7 @@ export const getQuote = async (
     'toChain',
     'toToken',
   ]
-  requiredParameters.forEach((requiredParameter) => {
+  for (const requiredParameter of requiredParameters) {
     if (!params[requiredParameter]) {
       throw new SDKError(
         new ValidationError(
@@ -92,7 +70,7 @@ export const getQuote = async (
         )
       )
     }
-  })
+  }
   const _config = config.get()
   // apply defaults
   params.integrator ??= _config.integrator
@@ -107,11 +85,11 @@ export const getQuote = async (
   params.denyExchanges ??= _config.routeOptions?.exchanges?.deny
   params.preferExchanges ??= _config.routeOptions?.exchanges?.prefer
 
-  Object.keys(params).forEach(
-    (key) =>
-      !params[key as keyof QuoteRequest] &&
+  for (const key of Object.keys(params)) {
+    if (!params[key as keyof QuoteRequest]) {
       delete params[key as keyof QuoteRequest]
-  )
+    }
+  }
 
   return await request<LiFiStep>(
     `${_config.apiUrl}/quote?${new URLSearchParams(
@@ -121,126 +99,6 @@ export const getQuote = async (
       signal: options?.signal,
     }
   )
-}
-
-/**
- * Get a quote for a destination contract call
- * @param params - The configuration of the requested destination call
- * @param options - Request options
- * @throws {LiFiError} - Throws a LiFiError if request fails
- * @returns - Returns step.
- */
-export const getContractCallsQuote = async (
-  params: ContractCallsQuoteRequest,
-  options?: RequestOptions
-): Promise<LiFiStep> => {
-  // validation
-  const requiredParameters: Array<keyof ContractCallsQuoteRequest> = [
-    'fromChain',
-    'fromToken',
-    'fromAddress',
-    'toChain',
-    'toToken',
-    'contractCalls',
-  ]
-  requiredParameters.forEach((requiredParameter) => {
-    if (!params[requiredParameter]) {
-      throw new SDKError(
-        new ValidationError(
-          `Required parameter "${requiredParameter}" is missing.`
-        )
-      )
-    }
-  })
-  if (
-    !isContractCallsRequestWithFromAmount(params) &&
-    !isContractCallsRequestWithToAmount(params)
-  ) {
-    throw new SDKError(
-      new ValidationError(
-        `Required parameter "fromAmount" or "toAmount" is missing.`
-      )
-    )
-  }
-  const _config = config.get()
-  // apply defaults
-  // option.order is not used in this endpoint
-  params.integrator ??= _config.integrator
-  params.slippage ??= _config.routeOptions?.slippage
-  params.referrer ??= _config.routeOptions?.referrer
-  params.fee ??= _config.routeOptions?.fee
-  params.allowBridges ??= _config.routeOptions?.bridges?.allow
-  params.denyBridges ??= _config.routeOptions?.bridges?.deny
-  params.preferBridges ??= _config.routeOptions?.bridges?.prefer
-  params.allowExchanges ??= _config.routeOptions?.exchanges?.allow
-  params.denyExchanges ??= _config.routeOptions?.exchanges?.deny
-  params.preferExchanges ??= _config.routeOptions?.exchanges?.prefer
-  // send request
-  return await request<LiFiStep>(`${_config.apiUrl}/quote/contractCalls`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(params),
-    signal: options?.signal,
-  })
-}
-
-/**
- * Check the status of a transfer. For cross chain transfers, the "bridge" parameter is required.
- * @param params - Configuration of the requested status
- * @param options - Request options.
- * @throws {LiFiError} - Throws a LiFiError if request fails
- * @returns Returns status response.
- */
-export const getStatus = async (
-  params: GetStatusRequest,
-  options?: RequestOptions
-): Promise<StatusResponse> => {
-  if (!params.txHash) {
-    throw new SDKError(
-      new ValidationError('Required parameter "txHash" is missing.')
-    )
-  }
-  const queryParams = new URLSearchParams(
-    params as unknown as Record<string, string>
-  )
-  return await request<StatusResponse>(
-    `${config.get().apiUrl}/status?${queryParams}`,
-    {
-      signal: options?.signal,
-    }
-  )
-}
-
-/**
- * Get all available chains
- * @param params - The configuration of the requested chains
- * @param options - Request options
- * @returns A list of all available chains
- * @throws {LiFiError} Throws a LiFiError if request fails.
- */
-export const getChains = async (
-  params?: ChainsRequest,
-  options?: RequestOptions
-): Promise<ExtendedChain[]> => {
-  if (params) {
-    Object.keys(params).forEach(
-      (key) =>
-        !params[key as keyof ChainsRequest] &&
-        delete params[key as keyof ChainsRequest]
-    )
-  }
-
-  const response = await request<ChainsResponse>(
-    `${config.get().apiUrl}/chains?${new URLSearchParams(
-      params as Record<string, string>
-    )}`,
-    {
-      signal: options?.signal,
-    }
-  )
-  return response.chains
 }
 
 /**
@@ -276,6 +134,69 @@ export const getRoutes = async (
 }
 
 /**
+ * Get a quote for a destination contract call
+ * @param params - The configuration of the requested destination call
+ * @param options - Request options
+ * @throws {LiFiError} - Throws a LiFiError if request fails
+ * @returns - Returns step.
+ */
+export const getContractCallsQuote = async (
+  params: ContractCallsQuoteRequest,
+  options?: RequestOptions
+): Promise<LiFiStep> => {
+  // validation
+  const requiredParameters: Array<keyof ContractCallsQuoteRequest> = [
+    'fromChain',
+    'fromToken',
+    'fromAddress',
+    'toChain',
+    'toToken',
+    'contractCalls',
+  ]
+  for (const requiredParameter of requiredParameters) {
+    if (!params[requiredParameter]) {
+      throw new SDKError(
+        new ValidationError(
+          `Required parameter "${requiredParameter}" is missing.`
+        )
+      )
+    }
+  }
+  if (
+    !isContractCallsRequestWithFromAmount(params) &&
+    !isContractCallsRequestWithToAmount(params)
+  ) {
+    throw new SDKError(
+      new ValidationError(
+        `Required parameter "fromAmount" or "toAmount" is missing.`
+      )
+    )
+  }
+  const _config = config.get()
+  // apply defaults
+  // option.order is not used in this endpoint
+  params.integrator ??= _config.integrator
+  params.slippage ??= _config.routeOptions?.slippage
+  params.referrer ??= _config.routeOptions?.referrer
+  params.fee ??= _config.routeOptions?.fee
+  params.allowBridges ??= _config.routeOptions?.bridges?.allow
+  params.denyBridges ??= _config.routeOptions?.bridges?.deny
+  params.preferBridges ??= _config.routeOptions?.bridges?.prefer
+  params.allowExchanges ??= _config.routeOptions?.exchanges?.allow
+  params.denyExchanges ??= _config.routeOptions?.exchanges?.deny
+  params.preferExchanges ??= _config.routeOptions?.exchanges?.prefer
+  // send request
+  return await request<LiFiStep>(`${_config.apiUrl}/quote/contractCalls`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(params),
+    signal: options?.signal,
+  })
+}
+
+/**
  * Get the transaction data for a single step of a route
  * @param step - The step object.
  * @param options - Request options
@@ -288,7 +209,6 @@ export const getStepTransaction = async (
 ): Promise<LiFiStep> => {
   if (!isStep(step)) {
     // While the validation fails for some users we should not enforce it
-    // eslint-disable-next-line no-console
     console.warn('SDK Validation: Invalid Step', step)
   }
 
@@ -306,30 +226,223 @@ export const getStepTransaction = async (
 }
 
 /**
- * Get the available tools to bridge and swap tokens.
- * @param params - The configuration of the requested tools
- * @param options - Request options
- * @returns The tools that are available on the requested chains
+ * Check the status of a transfer. For cross chain transfers, the "bridge" parameter is required.
+ * @param params - Configuration of the requested status
+ * @param options - Request options.
+ * @throws {LiFiError} - Throws a LiFiError if request fails
+ * @returns Returns status response.
  */
-export const getTools = async (
-  params?: ToolsRequest,
+export const getStatus = async (
+  params: GetStatusRequest,
   options?: RequestOptions
-): Promise<ToolsResponse> => {
-  if (params) {
-    Object.keys(params).forEach(
-      (key) =>
-        !params[key as keyof ToolsRequest] &&
-        delete params[key as keyof ToolsRequest]
+): Promise<StatusResponse> => {
+  if (!params.txHash) {
+    throw new SDKError(
+      new ValidationError('Required parameter "txHash" is missing.')
     )
   }
-  return await request<ToolsResponse>(
-    `${config.get().apiUrl}/tools?${new URLSearchParams(
-      params as Record<string, string>
+  const queryParams = new URLSearchParams(
+    params as unknown as Record<string, string>
+  )
+  return await request<StatusResponse>(
+    `${config.get().apiUrl}/status?${queryParams}`,
+    {
+      signal: options?.signal,
+    }
+  )
+}
+
+/**
+ * Get a relayer quote for a token transfer
+ * @param params - The configuration of the requested quote
+ * @param options - Request options
+ * @throws {LiFiError} - Throws a LiFiError if request fails
+ * @returns Relayer quote for a token transfer
+ */
+export const getRelayerQuote = async (
+  params: QuoteRequest,
+  options?: RequestOptions
+): Promise<RelayerQuoteResponseData> => {
+  const requiredParameters: Array<keyof QuoteRequest> = [
+    'fromChain',
+    'fromToken',
+    'fromAddress',
+    'fromAmount',
+    'toChain',
+    'toToken',
+  ]
+  for (const requiredParameter of requiredParameters) {
+    if (!params[requiredParameter]) {
+      throw new SDKError(
+        new ValidationError(
+          `Required parameter "${requiredParameter}" is missing.`
+        )
+      )
+    }
+  }
+  const _config = config.get()
+  // apply defaults
+  params.integrator ??= _config.integrator
+  params.order ??= _config.routeOptions?.order
+  params.slippage ??= _config.routeOptions?.slippage
+  params.referrer ??= _config.routeOptions?.referrer
+  params.fee ??= _config.routeOptions?.fee
+  params.allowBridges ??= _config.routeOptions?.bridges?.allow
+  params.denyBridges ??= _config.routeOptions?.bridges?.deny
+  params.preferBridges ??= _config.routeOptions?.bridges?.prefer
+  params.allowExchanges ??= _config.routeOptions?.exchanges?.allow
+  params.denyExchanges ??= _config.routeOptions?.exchanges?.deny
+  params.preferExchanges ??= _config.routeOptions?.exchanges?.prefer
+
+  for (const key of Object.keys(params)) {
+    if (!params[key as keyof QuoteRequest]) {
+      delete params[key as keyof QuoteRequest]
+    }
+  }
+
+  const result = await request<RelayerQuoteResponse>(
+    `${config.get().apiUrl}/relayer/quote?${new URLSearchParams(
+      params as unknown as Record<string, string>
     )}`,
     {
       signal: options?.signal,
     }
   )
+
+  if (result.status === 'error') {
+    throw new BaseError(
+      ErrorName.ServerError,
+      result.data.code,
+      result.data.message
+    )
+  }
+
+  return result.data
+}
+
+/**
+ * Relay a transaction through the relayer service
+ * @param params - The configuration for the relay request
+ * @param options - Request options
+ * @throws {LiFiError} - Throws a LiFiError if request fails
+ * @returns Task ID for the relayed transaction
+ */
+export const relayTransaction = async (
+  params: RelayRequest,
+  options?: RequestOptions
+): Promise<RelayResponseData> => {
+  const requiredParameters: Array<keyof RelayRequest> = [
+    'tokenOwner',
+    'chainId',
+    'permits',
+    'callData',
+  ]
+
+  for (const requiredParameter of requiredParameters) {
+    if (!params[requiredParameter]) {
+      throw new SDKError(
+        new ValidationError(
+          `Required parameter "${requiredParameter}" is missing.`
+        )
+      )
+    }
+  }
+
+  const result = await request<RelayResponse>(
+    `${config.get().apiUrl}/relayer/relay`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(params, (_, value) => {
+        if (typeof value === 'bigint') {
+          return value.toString()
+        }
+        return value
+      }),
+      signal: options?.signal,
+    }
+  )
+
+  if (result.status === 'error') {
+    throw new BaseError(
+      ErrorName.ServerError,
+      result.data.code,
+      result.data.message
+    )
+  }
+
+  return result.data
+}
+
+/**
+ * Get the status of a relayed transaction
+ * @param params - Parameters for the relay status request
+ * @param options - Request options
+ * @throws {LiFiError} - Throws a LiFiError if request fails
+ * @returns Status of the relayed transaction
+ */
+export const getRelayedTransactionStatus = async (
+  params: RelayStatusRequest,
+  options?: RequestOptions
+): Promise<RelayStatusResponseData> => {
+  if (!params.taskId) {
+    throw new SDKError(
+      new ValidationError('Required parameter "taskId" is missing.')
+    )
+  }
+
+  const result = await request<RelayStatusResponse>(
+    `${config.get().apiUrl}/relayer/status/${params.taskId}`,
+    {
+      signal: options?.signal,
+    }
+  )
+
+  if (result.status === 'error') {
+    throw new BaseError(
+      ErrorName.ServerError,
+      result.data.code,
+      result.data.message
+    )
+  }
+
+  return result.data
+}
+
+/**
+ * Get all available chains
+ * @param params - The configuration of the requested chains
+ * @param options - Request options
+ * @returns A list of all available chains
+ * @throws {LiFiError} Throws a LiFiError if request fails.
+ */
+export const getChains = async (
+  params?: ChainsRequest,
+  options?: RequestOptions
+): Promise<ExtendedChain[]> => {
+  if (params) {
+    for (const key of Object.keys(params)) {
+      if (!params[key as keyof ChainsRequest]) {
+        delete params[key as keyof ChainsRequest]
+      }
+    }
+  }
+  const urlSearchParams = new URLSearchParams(
+    params as Record<string, string>
+  ).toString()
+  const response = await withDedupe(
+    () =>
+      request<ChainsResponse>(
+        `${config.get().apiUrl}/chains?${urlSearchParams}`,
+        {
+          signal: options?.signal,
+        }
+      ),
+    { id: `${getChains.name}.${urlSearchParams}` }
+  )
+  return response.chains
 }
 
 /**
@@ -343,15 +456,81 @@ export const getTokens = async (
   options?: RequestOptions
 ): Promise<TokensResponse> => {
   if (params) {
-    Object.keys(params).forEach(
-      (key) =>
-        !params[key as keyof TokensRequest] &&
+    for (const key of Object.keys(params)) {
+      if (!params[key as keyof TokensRequest]) {
         delete params[key as keyof TokensRequest]
+      }
+    }
+  }
+  const urlSearchParams = new URLSearchParams(
+    params as Record<string, string>
+  ).toString()
+  const response = await withDedupe(
+    () =>
+      request<TokensResponse>(
+        `${config.get().apiUrl}/tokens?${urlSearchParams}`,
+        {
+          signal: options?.signal,
+        }
+      ),
+    { id: `${getTokens.name}.${urlSearchParams}` }
+  )
+  return response
+}
+
+/**
+ * Fetch information about a Token
+ * @param chain - Id or key of the chain that contains the token
+ * @param token - Address or symbol of the token on the requested chain
+ * @param options - Request options
+ * @throws {LiFiError} - Throws a LiFiError if request fails
+ * @returns Token information
+ */
+export const getToken = async (
+  chain: ChainKey | ChainId,
+  token: string,
+  options?: RequestOptions
+): Promise<Token> => {
+  if (!chain) {
+    throw new SDKError(
+      new ValidationError('Required parameter "chain" is missing.')
     )
   }
+  if (!token) {
+    throw new SDKError(
+      new ValidationError('Required parameter "token" is missing.')
+    )
+  }
+  return await request<Token>(
+    `${config.get().apiUrl}/token?${new URLSearchParams({
+      chain,
+      token,
+    } as Record<string, string>)}`,
+    {
+      signal: options?.signal,
+    }
+  )
+}
 
-  return await request<TokensResponse>(
-    `${config.get().apiUrl}/tokens?${new URLSearchParams(
+/**
+ * Get the available tools to bridge and swap tokens.
+ * @param params - The configuration of the requested tools
+ * @param options - Request options
+ * @returns The tools that are available on the requested chains
+ */
+export const getTools = async (
+  params?: ToolsRequest,
+  options?: RequestOptions
+): Promise<ToolsResponse> => {
+  if (params) {
+    for (const key of Object.keys(params)) {
+      if (!params[key as keyof ToolsRequest]) {
+        delete params[key as keyof ToolsRequest]
+      }
+    }
+  }
+  return await request<ToolsResponse>(
+    `${config.get().apiUrl}/tools?${new URLSearchParams(
       params as Record<string, string>
     )}`,
     {
@@ -424,18 +603,15 @@ export const getConnections = async (
     'denyExchanges',
     'preferExchanges',
   ]
-  connectionRequestArrayParams.forEach((parameter) => {
-    const connectionRequestArrayParam: string[] = connectionRequest[
-      parameter
-    ] as string[]
+  for (const parameter of connectionRequestArrayParams) {
+    const connectionRequestArrayParam = connectionRequest[parameter] as string[]
 
     if (connectionRequestArrayParam?.length) {
-      connectionRequestArrayParam?.forEach((value) => {
+      for (const value of connectionRequestArrayParam) {
         url.searchParams.append(parameter, value)
-      })
+      }
     }
-  })
-
+  }
   return await request<ConnectionsResponse>(url, options)
 }
 

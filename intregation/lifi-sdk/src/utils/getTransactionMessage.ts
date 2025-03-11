@@ -1,6 +1,7 @@
-import type { LiFiStep, Process } from '@lifi/types'
+import type { LiFiStep } from '@lifi/types'
 import { formatUnits } from 'viem'
 import { config } from '../config.js'
+import type { Process } from '../core/types.js'
 
 export const getTransactionNotSentMessage = async (
   step?: LiFiStep,
@@ -23,10 +24,9 @@ export const getTransactionNotSentMessage = async (
     ", please retry.<br/>If it still doesn't work, it is safe to delete this transfer and start a new one."
 
   // add transaction explorer link if available
-  transactionNotSend +=
-    process && process.txLink
-      ? `<br>You can check the failed transaction&nbsp;<a href="${process.txLink}" target="_blank" rel="nofollow noreferrer">here</a>.`
-      : ''
+  transactionNotSend += process?.txLink
+    ? `<br>You can check the failed transaction&nbsp;<a href="${process.txLink}" target="_blank" rel="nofollow noreferrer">here</a>.`
+    : ''
 
   return transactionNotSend
 }

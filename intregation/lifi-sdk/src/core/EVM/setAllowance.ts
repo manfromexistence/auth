@@ -1,7 +1,8 @@
-import type { Client, Hash, SendTransactionParameters } from 'viem'
+import type { Address, Client, Hash, SendTransactionParameters } from 'viem'
 import { encodeFunctionData } from 'viem'
 import { sendTransaction } from 'viem/actions'
-import { isNativeTokenAddress } from '../../utils/utils.js'
+import { getAction } from 'viem/utils'
+import { isNativeTokenAddress } from '../../utils/isZeroAddress.js'
 import type { ExecutionOptions, TransactionParameters } from '../types.js'
 import { approveAbi } from './abi.js'
 import { getAllowance } from './getAllowance.js'
@@ -10,10 +11,10 @@ import { getMaxPriorityFeePerGas } from './utils.js'
 
 export const setAllowance = async (
   client: Client,
-  tokenAddress: string,
-  contractAddress: string,
+  tokenAddress: Address,
+  contractAddress: Address,
   amount: bigint,
-  settings?: ExecutionOptions,
+  executionOptions?: ExecutionOptions,
   returnPopulatedTransaction?: boolean
 ): Promise<Hash> => {
   const data = encodeFunctionData({
@@ -35,9 +36,9 @@ export const setAllowance = async (
         : undefined,
   }
 
-  if (settings?.updateTransactionRequestHook) {
+  if (executionOptions?.updateTransactionRequestHook) {
     const customizedTransactionRequest: TransactionParameters =
-      await settings.updateTransactionRequestHook({
+      await executionOptions.updateTransactionRequestHook({
         requestType: 'approve',
         ...transactionRequest,
       })
@@ -48,7 +49,11 @@ export const setAllowance = async (
     }
   }
 
-  return sendTransaction(client, {
+  return getAction(
+    client,
+    sendTransaction,
+    'sendTransaction'
+  )({
     to: transactionRequest.to,
     account: client.account!,
     data: transactionRequest.data,
@@ -56,7 +61,6 @@ export const setAllowance = async (
     gasPrice: transactionRequest.gasPrice,
     maxFeePerGas: transactionRequest.maxFeePerGas,
     maxPriorityFeePerGas: transactionRequest.maxPriorityFeePerGas,
-    chain: null,
   } as SendTransactionParameters)
 }
 
@@ -81,16 +85,16 @@ export const setTokenAllowance = async ({
   }
   const approvedAmount = await getAllowance(
     token.chainId,
-    token.address,
+    token.address as Address,
     walletClient.account!.address,
-    spenderAddress
+    spenderAddress as Address
   )
 
   if (amount > approvedAmount) {
     const approveTx = await setAllowance(
       walletClient,
-      token.address,
-      spenderAddress,
+      token.address as Address,
+      spenderAddress as Address,
       amount
     )
 
@@ -117,15 +121,15 @@ export const revokeTokenApproval = async ({
   }
   const approvedAmount = await getAllowance(
     token.chainId,
-    token.address,
+    token.address as Address,
     walletClient.account!.address,
-    spenderAddress
+    spenderAddress as Address
   )
   if (approvedAmount > 0) {
     const approveTx = await setAllowance(
       walletClient,
-      token.address,
-      spenderAddress,
+      token.address as Address,
+      spenderAddress as Address,
       0n
     )
 

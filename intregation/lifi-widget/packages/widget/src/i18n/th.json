@@ -16,10 +16,10 @@
     "bridgeReview": "",
     "buy": "ซื้อ",
     "cancel": "ยกเลิก",
-    "changeWallet": "เปลี่ยนกระเป๋า",
     "checkoutReview": "",
     "close": "ปิด",
     "confirm": "ยืนยัน",
+    "connectAnotherWallet": "",
     "connectWallet": "เชื่อมต่อ กระเป๋า",
     "contactSupport": "ติดต่อฝ่ายสนับสนุน",
     "continue": "ดำเนินการต่อ",
@@ -52,12 +52,14 @@
   },
   "header": {
     "activeTransactions": "ธุรกรรมมีผล",
+    "amount": "",
     "bookmarkedWallets": "กระเป๋าเงินที่ Bokkmark ไว้แล้ว",
     "bridge": "บริดจ์",
     "checkout": "เช็คเอาท์",
     "checkoutDetails": "",
     "deposit": "",
     "depositDetails": "",
+    "depositTo": "",
     "exchange": "แลกเปลี่ยน",
     "from": "แลกเปลี่ยนจาก",
     "gas": "แก็ส",
@@ -82,6 +84,9 @@
       "autoRefuel": "คุณใช้แก็ส {{chainName}} เหลือน้อย เมื่อดำเนินการต่อ คุณจะได้รับแก็สเพียงพอสำหรับการแลกเปลี่ยนให้เสร็จสมบูรณ์",
       "emptyActiveTransactions": "การแลกเปลี่ยนที่กำลังดำเนินการจะปรากฏที่นี่. เมื่อเสร็จสิ้น, จะพบประวัติการแลกเปลี่ยน.",
       "emptyTokenList": "เราไม่พบโทเค็นใน {{chainName}} เชนหรือคุณไม่มีโทเค็น. โปรดลองอีกครั้งหรือเลือกเชนอื่น.",
+      "emptyChainList": "",
+      "emptyBridgesList": "",
+      "emptyExchangesList": "",
       "emptyTransactionHistory": "ประวัติการแลกเปลี่ยนจะถูกเก็บไว้ในเครื่องเท่านั้นและจะถูกลบหากคุณล้างข้อมูลเบราว์เซอร์ของคุณ.",
       "fundsToExchange": "เงินที่ส่งไปยัง Exchange อาจหายไป",
       "toAddressIsRequired": "กรุณาระบุที่อยู่ของวอลเล็ตปลายทางที่ต้องการโอนเงินไป",
@@ -139,6 +144,7 @@
       "signatureRejected": "จำเป็นต้องมีลายเซ็นของคุณเพื่อทำธุรกรมให้เสร็จสมบูรณ์. {{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} บน {{chainName}} ยังคงอยู่ในกระเป๋าเงินของคุณ.",
       "slippageThreshold": "การคลาดเคลื่อนมีขนาดใหญ่กว่าเกณฑ์ที่กำหนด โปรดขอเส้นทางใหม่เพื่อได้รับการเสนอราคาใหม่.",
       "transactionCanceled": "ธุรกรรมได้ถูกยกเลิกแล้ว",
+      "transactionConflict": "",
       "transactionExpired": "",
       "transactionFailed": "โปรดตรวจสอบบล็อกการสำรวจสำหรับข้อมูลเพิ่มเติม.",
       "transactionNotSent": "ธุรกรรมไม่ได้ถูกส่ง",
@@ -158,6 +164,7 @@
       "signatureRejected": "ต้องมีลายเซ็น",
       "slippageNotMet": "ความคลาดเคลื่อนของราคาไม่เป็นไปตามเงื่อนไข.",
       "transactionCanceled": "ธุรกรรมถูกยกเลิกแล้ว",
+      "transactionConflict": "",
       "transactionExpired": "",
       "transactionFailed": "การทำธุรกรรมล้มเหลว",
       "transactionSimulationFailed": "",
@@ -260,13 +267,15 @@
     "stepBridge": "บริดจ์",
     "stepBridgeAndBuy": "บริดจ์และซื้อ",
     "stepBridgeAndDeposit": "",
+    "stepBuy": "ซื้อ",
+    "stepDeposit": "",
     "stepDetails": "{{tool}} โดย LI.FI",
     "stepSwap": "แลกเปลี่ยน",
     "stepSwapAndBridge": "แลกเปลี่ยนและบริดจ์",
     "stepSwapAndBuy": "แลกเปลี่ยน และ ซื้อ",
     "stepSwapAndDeposit": "",
-    "supportId": "หมายเลขที่สนับสนุน",
     "swapStepDetails": "แลกเปลี่ยนบน {{chain}} ผ่าน {{tool}}",
+    "transferId": "",
     "tags": {
       "cheapest": "ผลตอบแทนที่ดีที่สุด",
       "fastest": "รวดเร็วที่สุด"
@@ -275,7 +284,10 @@
     "tokenOnChain": "{{tokenSymbol}} บน {{chainName}}",
     "tokenOnChainAmount": "{{amount, number(maximumFractionDigits: 9)}}{{tokenSymbol}} บน {{chainName}}",
     "tokenSearch": "ค้นหาชื่อของเหรียญ หรือ ที่อยู่",
-    "valueLoss": "มูลค่าที่สูญเสีย"
+    "valueLoss": "มูลค่าที่สูญเสีย",
+    "searchChains": "",
+    "searchBridges": "",
+    "searchExchanges": ""
   },
   "settings": {
     "theme": "ธีม",
@@ -303,8 +315,5 @@
     "noBookmarkedWallets": "ไม่มีกระเป๋าเงินที่ bookmark ไว้",
     "noConnectedWallets": "ไม่มีกระเป๋าเงินที่เชื่อมต่อไว้",
     "noRecentWallets": "ไม่พบกระเป๋าเงินล่าสุด"
-  },
-  "wallet": {
-    "extensionNotFound": "โปรดตรวจสอบว่ามีเพียงส่วนขยายของเบราว์เซอร์ {{name}} เท่านั้นที่ใช้งานได้ก่อนที่จะเลือกกระเป๋าเงินนี้."
   }
 }

@@ -2,6 +2,236 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.18.0](https://github.com/lifinance/widget/compare/v3.17.1...v3.18.0) (2025-03-10)
+
+
+### Features
+
+* add Permit (ERC-2612), Permit2 and Wallet Call API (EIP-5792) support ([#331](https://github.com/lifinance/widget/issues/331)) ([1ec9786](https://github.com/lifinance/widget/commit/1ec97864f12e6e15074f6efeb1dbe45d715d2261))
+* add RouteTokenDescription hidden option ([#361](https://github.com/lifinance/widget/issues/361)) ([bb3e047](https://github.com/lifinance/widget/commit/bb3e047adc05dc934b7981de1438cd51cb760678))
+
+
+### Bug Fixes
+
+* enable undeployed sca transfers ([#362](https://github.com/lifinance/widget/issues/362)) ([4038d7f](https://github.com/lifinance/widget/commit/4038d7fdc412f5918e31a5a8dfce8f58b608987c))
+* **timers:** display hours and days section of timers, and update copy ([#358](https://github.com/lifinance/widget/issues/358)) ([0654c20](https://github.com/lifinance/widget/commit/0654c2000b3dfd87ca02be6e4aff5b51dd153681))
+
+### [3.17.1](https://github.com/lifinance/widget/compare/v3.17.0...v3.17.1) (2025-02-16)
+
+## [3.17.0](https://github.com/lifinance/widget/compare/v3.16.1...v3.17.0) (2025-02-16)
+
+
+### Features
+
+* add option to hide reverse tokens button ([#352](https://github.com/lifinance/widget/issues/352)) ([bd4b882](https://github.com/lifinance/widget/commit/bd4b8824d0a4d02e506fcca51ba55a74df44f1eb))
+* **timer:**  counts up instead of countdown ([#348](https://github.com/lifinance/widget/issues/348)) ([6c9d22e](https://github.com/lifinance/widget/commit/6c9d22e8b1bf4cc3228d1534aae6b81120000da4))
+* widget auto slippage mode ([#349](https://github.com/lifinance/widget/issues/349)) ([580ce06](https://github.com/lifinance/widget/commit/580ce067f26fe0122a2ef14f6b0783b232148775))
+
+
+### Bug Fixes
+
+* transaction history page virtualization ([#351](https://github.com/lifinance/widget/issues/351)) ([257a581](https://github.com/lifinance/widget/commit/257a581f6794e309d9d05f8156e359ec9d59d0fa))
+
+### [3.16.1](https://github.com/lifinance/widget/compare/v3.16.0...v3.16.1) (2025-02-11)
+
+
+### Bug Fixes
+
+* improve SCA as destination flow ([#350](https://github.com/lifinance/widget/issues/350)) ([c58e5dd](https://github.com/lifinance/widget/commit/c58e5dd5835f8b25411f9b33070c914702f659ab))
+* replace lifuel protocol with gasZip ([#347](https://github.com/lifinance/widget/issues/347)) ([8b4bdf2](https://github.com/lifinance/widget/commit/8b4bdf24936c01f4efd24f8a370262992cd545a0))
+* restrict 2-step routes if account is not deployed on destination… ([#346](https://github.com/lifinance/widget/issues/346)) ([bf48c3c](https://github.com/lifinance/widget/commit/bf48c3c0ed5501bc720dfa8003f1b0ffd3ec571d))
+
+## [3.16.0](https://github.com/lifinance/widget/compare/v3.15.2...v3.16.0) (2025-02-01)
+
+
+### Features
+
+* add low activity wallet warning ([fb69217](https://github.com/lifinance/widget/commit/fb692176b87666dd37e18a72b11ad7b43901a6bf))
+
+### [3.15.2](https://github.com/lifinance/widget/compare/v3.15.1...v3.15.2) (2025-01-31)
+
+
+### Bug Fixes
+
+* hide required wallet info message when wallet is present ([#345](https://github.com/lifinance/widget/issues/345)) ([88b5e18](https://github.com/lifinance/widget/commit/88b5e189961afaed8e6902f114758886512fd980))
+
+### [3.15.1](https://github.com/lifinance/widget/compare/v3.15.0...v3.15.1) (2025-01-31)
+
+
+### Bug Fixes
+
+* improve funds loss warning message ([317f8b1](https://github.com/lifinance/widget/commit/317f8b131cfc0c685ebb5e4f4fe1a9828afa4a51))
+* include gas sufficiency message props ([2b29bd8](https://github.com/lifinance/widget/commit/2b29bd857a81733dfe61894fc446814be3b6c7b0))
+
+## [3.15.0](https://github.com/lifinance/widget/compare/v3.14.2...v3.15.0) (2025-01-30)
+
+
+### Features
+
+* improve warning messages ([#344](https://github.com/lifinance/widget/issues/344)) ([17e5a2b](https://github.com/lifinance/widget/commit/17e5a2b236e54590c83e1e6c279d04c45f9dcbef))
+
+### [3.14.2](https://github.com/lifinance/widget/compare/v3.14.1...v3.14.2) (2025-01-28)
+
+
+### Bug Fixes
+
+* validate address from URL params and bookmark it ([#343](https://github.com/lifinance/widget/issues/343)) ([688236e](https://github.com/lifinance/widget/commit/688236e6e374482155bcbab6d3a454a0cab9fa7f))
+
+### [3.14.1](https://github.com/lifinance/widget/compare/v3.14.0...v3.14.1) (2025-01-23)
+
+
+### Bug Fixes
+
+* address confirmation bottom sheet height ([59d034b](https://github.com/lifinance/widget/commit/59d034b89b25d58345105de731fe3af2746e3119))
+
+## [3.14.0](https://github.com/lifinance/widget/compare/v3.13.2...v3.14.0) (2025-01-22)
+
+
+### Features
+
+* add configurable route labels/badges ([#338](https://github.com/lifinance/widget/issues/338)) ([f6fe53e](https://github.com/lifinance/widget/commit/f6fe53e5b1b90003c87651bb82f637b85ce0da37))
+* add more UTXO wallets ([d787698](https://github.com/lifinance/widget/commit/d7876980c839a9f591078a613d28de956e9c0805))
+* add smart contract account info message for destination wallets ([#340](https://github.com/lifinance/widget/issues/340)) ([ba57082](https://github.com/lifinance/widget/commit/ba57082582a9ddfae9ccec7847ade5e1041491ee))
+
+
+### Bug Fixes
+
+* improve step titles in custom steps ([825856c](https://github.com/lifinance/widget/commit/825856c74d2ba8f32eeb6d4fcde771613776e534))
+* improve token amount formatting ([#339](https://github.com/lifinance/widget/issues/339)) ([a6a3d10](https://github.com/lifinance/widget/commit/a6a3d1094d3403fac5b14797ba652d00a415f5a8))
+
+### [3.13.2](https://github.com/lifinance/widget/compare/v3.13.1...v3.13.2) (2024-12-27)
+
+
+### Bug Fixes
+
+* support loadable wallets ([783ed97](https://github.com/lifinance/widget/commit/783ed9750cc59767bc02708935e207667b1a73fe))
+
+### [3.13.1](https://github.com/lifinance/widget/compare/v3.13.0...v3.13.1) (2024-12-20)
+
+
+### Bug Fixes
+
+* remix compatibility ([#336](https://github.com/lifinance/widget/issues/336)) ([3b6fcb3](https://github.com/lifinance/widget/commit/3b6fcb3905c1751ac125e3e4ac9f9ac588eac4c0))
+
+## [3.13.0](https://github.com/lifinance/widget/compare/v3.12.5...v3.13.0) (2024-12-20)
+
+
+### Features
+
+* improve peer dependencies ([#335](https://github.com/lifinance/widget/issues/335)) ([cb159cf](https://github.com/lifinance/widget/commit/cb159cfe892eef466a4370774c9bb6c25835a967))
+* migrate to MUI v6 ([#334](https://github.com/lifinance/widget/issues/334)) ([12c632d](https://github.com/lifinance/widget/commit/12c632d7a89f2b75b4946eec315489b85601f452))
+
+
+### Bug Fixes
+
+* improve deposit flow card titles ([#328](https://github.com/lifinance/widget/issues/328)) ([9eb9a20](https://github.com/lifinance/widget/commit/9eb9a200308c9889d403595984eaef33bb93a31e))
+* prepare for react router v7 ([43d27a1](https://github.com/lifinance/widget/commit/43d27a19d878079b50858165fc4d287f6cbc581d))
+* should show wallet menu in split mode ([7ca782c](https://github.com/lifinance/widget/commit/7ca782c31146ee5ea312eb24b489c70e356277de))
+
+### [3.12.5](https://github.com/lifinance/widget/compare/v3.12.4...v3.12.5) (2024-12-13)
+
+### [3.12.4](https://github.com/lifinance/widget/compare/v3.12.3...v3.12.4) (2024-12-12)
+
+
+### Bug Fixes
+
+* improve powered by with dynamic configuration ([#332](https://github.com/lifinance/widget/issues/332)) ([6ae3abb](https://github.com/lifinance/widget/commit/6ae3abbca2140fcda5c9a3ce1f014b27651141aa))
+* keep previous data only when wallet is connected ([1b4df34](https://github.com/lifinance/widget/commit/1b4df3448f69c1639a1edc23d5b70ad66b0538e9))
+
+### [3.12.3](https://github.com/lifinance/widget/compare/v3.12.2...v3.12.3) (2024-12-05)
+
+### [3.12.2](https://github.com/lifinance/widget/compare/v3.12.1...v3.12.2) (2024-11-19)
+
+### [3.12.1](https://github.com/lifinance/widget/compare/v3.12.0...v3.12.1) (2024-11-08)
+
+## [3.12.0](https://github.com/lifinance/widget/compare/v3.11.0...v3.12.0) (2024-11-06)
+
+
+### Features
+
+* add TokenSearch and RouteSelected events ([#324](https://github.com/lifinance/widget/issues/324)) ([9165dd0](https://github.com/lifinance/widget/commit/9165dd03987fb8494671c1a46c9c16dd61e18d1f))
+
+
+### Bug Fixes
+
+* improve token balance and transaction history invalidation ([#325](https://github.com/lifinance/widget/issues/325)) ([5bcf6dc](https://github.com/lifinance/widget/commit/5bcf6dca1b1e2068925db3f6039a2d5fcc6f5ccc))
+
+## [3.11.0](https://github.com/lifinance/widget/compare/v3.10.0...v3.11.0) (2024-11-01)
+
+
+### Features
+
+* improve Safe support ([#323](https://github.com/lifinance/widget/issues/323)) ([6f1e5d1](https://github.com/lifinance/widget/commit/6f1e5d1cbb4e00c4219b0256ef29a4636df4d4e4))
+
+## [3.10.0](https://github.com/lifinance/widget/compare/v3.9.0...v3.10.0) (2024-10-30)
+
+
+### Features
+
+* add support for partial wallet management ([#320](https://github.com/lifinance/widget/issues/320)) ([e3b919b](https://github.com/lifinance/widget/commit/e3b919bc2d04b4205472e521df3f134076e43d98))
+
+
+### Bug Fixes
+
+* correct jumping title for in progress transfers ([3d0a607](https://github.com/lifinance/widget/commit/3d0a6076cbb1fa46dde60673637bc0fe9ff5df3c))
+
+## [3.9.0](https://github.com/lifinance/widget/compare/v3.8.2...v3.9.0) (2024-10-28)
+
+
+### Features
+
+* add active account tracking to the internal wallet management ([0872fe2](https://github.com/lifinance/widget/commit/0872fe2da2d2b3bd450d4cad181f5b50dd064c41))
+* add support for okx bitcoin wallet ([175c5fb](https://github.com/lifinance/widget/commit/175c5fb6b251dd591d14530303aeb8f41788f071))
+* try to auto-populate destination address for cross-ecosystem transfers ([323d3a1](https://github.com/lifinance/widget/commit/323d3a16255763e44caa0b3126641bb92a320da2))
+
+
+### Bug Fixes
+
+* always update the destination chain to match the source one ([4d428ea](https://github.com/lifinance/widget/commit/4d428ea566763e77fdbde73c0bd78f6adea41e67))
+* make destination address required if source address is a smart contract wallet ([34d8528](https://github.com/lifinance/widget/commit/34d8528a770198132b67d4af373961dce5d0ebe5))
+
+### [3.8.2](https://github.com/lifinance/widget/compare/v3.8.1...v3.8.2) (2024-10-24)
+
+
+### Bug Fixes
+
+* avoid gas check for smart contract wallets ([1bd956d](https://github.com/lifinance/widget/commit/1bd956d93d1bceb5c27b64e7ca2c8777d5b9ee7a))
+* improve safe wallet connectivity ([df5ded3](https://github.com/lifinance/widget/commit/df5ded3e4f195ac96090509e3e54933a45232c97))
+* replace first-child with first-of-type to avoid warning ([d098a7c](https://github.com/lifinance/widget/commit/d098a7cc78e3e9aacf1bf10c5652b0ef60e638ee))
+* solana providers doesn't update accounts sometimes ([e911bea](https://github.com/lifinance/widget/commit/e911beaa43ceaf39a8d88e22f166db876174da10))
+
+### [3.8.1](https://github.com/lifinance/widget/compare/v3.8.0...v3.8.1) (2024-10-21)
+
+
+### Bug Fixes
+
+* add auto focus for search input field ([#314](https://github.com/lifinance/widget/issues/314)) ([01c1b49](https://github.com/lifinance/widget/commit/01c1b494886247f3f57f0a072041622998c38a53))
+* increase fractional and significant digits ([#313](https://github.com/lifinance/widget/issues/313)) ([06e4df6](https://github.com/lifinance/widget/commit/06e4df69a8cf2221eda87348e685880f02f5473b))
+
+## [3.8.0](https://github.com/lifinance/widget/compare/v3.7.0...v3.8.0) (2024-10-18)
+
+
+### Features
+
+* add Bitcoin/UTXO support ([#297](https://github.com/lifinance/widget/issues/297)) ([f83341f](https://github.com/lifinance/widget/commit/f83341f9b0d559dfda6c0cd37629b5f36642ae86))
+* emit events for settings changes ([#312](https://github.com/lifinance/widget/issues/312)) ([cf48cf2](https://github.com/lifinance/widget/commit/cf48cf22bec198099284cf3ce6ed6609b76a5f39))
+* widget events for send to wallet ([#309](https://github.com/lifinance/widget/issues/309)) ([b247afb](https://github.com/lifinance/widget/commit/b247afbb41b1ffd04be8f4b09862f72fc40d4a37))
+
+
+### Bug Fixes
+
+* crowdin config ([f9bf9ba](https://github.com/lifinance/widget/commit/f9bf9bab7fa2891d849f70c72ff16b096701fbb0))
+* nextjs example link ([a482ff3](https://github.com/lifinance/widget/commit/a482ff3510a72a6d619ac5e86af70b2dc28e11cc))
+* refactor, use and export calcPriceImpact function ([#307](https://github.com/lifinance/widget/issues/307)) ([234844f](https://github.com/lifinance/widget/commit/234844f79afd7b65dbfb6f46c3725ace247f5c0a))
+
+## [3.7.0](https://github.com/lifinance/widget/compare/v3.6.2...v3.7.0) (2024-10-02)
+
+
+### Features
+
+* add emitter event on location change ([#304](https://github.com/lifinance/widget/issues/304)) ([d6146f8](https://github.com/lifinance/widget/commit/d6146f83dcc27381d52b95f51e7fdcd05552dc58))
+* add search input to chain, bridges and exchanges pages ([#305](https://github.com/lifinance/widget/issues/305)) ([5504d95](https://github.com/lifinance/widget/commit/5504d95621d11a70ee3fb39108dbd8c0a2417978))
+
 ### [3.6.2](https://github.com/lifinance/widget/compare/v3.6.1...v3.6.2) (2024-09-24)
 
 

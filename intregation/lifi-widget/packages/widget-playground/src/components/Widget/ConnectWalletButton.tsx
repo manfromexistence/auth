@@ -1,15 +1,15 @@
-import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
-import WalletIcon from '@mui/icons-material/Wallet';
-import { Box } from '@mui/material';
-import { useAccount, useConnect, useConnectors, useDisconnect } from 'wagmi';
-import { shortenAddress } from '../../utils';
-import { ConnectionWalletButtonBase } from './WidgetView.style';
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew'
+import WalletIcon from '@mui/icons-material/Wallet'
+import { Box } from '@mui/material'
+import { useAccount, useConnect, useConnectors, useDisconnect } from 'wagmi'
+import { shortenAddress } from '../../utils/shortenAddress'
+import { ConnectionWalletButtonBase } from './WidgetView.style'
 
 export const ConnectWalletButton = () => {
-  const connectors = useConnectors();
-  const { connect } = useConnect();
-  const { disconnect } = useDisconnect();
-  const account = useAccount();
+  const connectors = useConnectors()
+  const { connect } = useConnect()
+  const { disconnect } = useDisconnect()
+  const account = useAccount()
 
   return account.isConnected && account.address ? (
     <ConnectionWalletButtonBase
@@ -17,8 +17,21 @@ export const ConnectWalletButton = () => {
       endIcon={<PowerSettingsNewIcon />}
       onClick={() => disconnect()}
     >
-      <Box pr={1}>{shortenAddress(account.address)}</Box>|
-      <Box pl={1}>Disconnect</Box>
+      <Box
+        sx={{
+          pr: 1,
+        }}
+      >
+        {shortenAddress(account.address)}
+      </Box>
+      |
+      <Box
+        sx={{
+          pl: 1,
+        }}
+      >
+        Disconnect
+      </Box>
     </ConnectionWalletButtonBase>
   ) : (
     <ConnectionWalletButtonBase
@@ -28,5 +41,5 @@ export const ConnectWalletButton = () => {
     >
       Connect wallet
     </ConnectionWalletButtonBase>
-  );
-};
+  )
+}

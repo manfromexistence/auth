@@ -3,19 +3,21 @@ import type { Client } from 'viem'
 import type { Mock } from 'vitest'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { buildStepObject } from '../../../tests/fixtures.js'
+import { LiFiErrorCode } from '../../errors/constants.js'
+import { ProviderError } from '../../errors/errors.js'
 import type { StatusManager } from '../StatusManager.js'
 import type { ExecutionOptions } from '../types.js'
 import { switchChain } from './switchChain.js'
 
-let client: Client,
-  step: LiFiStep,
-  statusManager: StatusManager,
-  hooks: ExecutionOptions,
-  requestMock: Mock,
-  switchChainHookMock: Mock,
-  findOrCreateProcessMock: Mock,
-  updateExecutionMock: Mock,
-  updateProcessMock: Mock
+let client: Client
+let step: LiFiStep
+let statusManager: StatusManager
+let hooks: ExecutionOptions
+let requestMock: Mock
+let switchChainHookMock: Mock
+let findOrCreateProcessMock: Mock
+let updateExecutionMock: Mock
+let updateProcessMock: Mock
 
 describe('switchChain', () => {
   beforeEach(() => {
@@ -127,7 +129,12 @@ describe('switchChain', () => {
               true,
               hooks.switchChainHook
             )
-          ).rejects.toThrowError(new Error('Chain switch required.'))
+          ).rejects.toThrowError(
+            new ProviderError(
+              LiFiErrorCode.ChainSwitchError,
+              'Chain switch required.'
+            )
+          )
 
           expect(switchChainHookMock).toHaveBeenCalledWith(
             step.action.fromChainId

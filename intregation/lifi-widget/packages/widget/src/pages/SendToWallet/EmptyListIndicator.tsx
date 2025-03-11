@@ -1,9 +1,9 @@
-import { Typography } from '@mui/material';
-import type { PropsWithChildren, ReactNode } from 'react';
-import { EmptyContainer, IconContainer } from './SendToWalletPage.style.js';
+import { Typography } from '@mui/material'
+import type { PropsWithChildren, ReactNode } from 'react'
+import { EmptyContainer, IconContainer } from './SendToWalletPage.style.js'
 
 interface EmptyListIndicatorProps extends PropsWithChildren {
-  icon: ReactNode;
+  icon: ReactNode
 }
 export const EmptyListIndicator = ({
   icon,
@@ -11,8 +11,14 @@ export const EmptyListIndicator = ({
 }: EmptyListIndicatorProps) => (
   <EmptyContainer>
     <IconContainer>{icon}</IconContainer>
-    <Typography fontSize={14} fontWeight={700} color="text.secondary">
+    <Typography
+      sx={{
+        fontSize: 14,
+        fontWeight: 700,
+        color: 'text.secondary',
+      }}
+    >
       {children}
     </Typography>
   </EmptyContainer>
-);
+)

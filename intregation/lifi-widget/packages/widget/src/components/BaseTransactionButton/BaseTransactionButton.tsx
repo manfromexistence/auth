@@ -1,12 +1,10 @@
-import { LoadingButton } from '@mui/lab';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { useAccount } from '../../hooks/useAccount.js';
-import { useChain } from '../../hooks/useChain.js';
-import { useWidgetConfig } from '../../providers/WidgetProvider/WidgetProvider.js';
-import { useFieldValues } from '../../stores/form/useFieldValues.js';
-import { navigationRoutes } from '../../utils/navigationRoutes.js';
-import type { BaseTransactionButtonProps } from './types.js';
+import { useAccount, useWalletMenu } from '@lifi/wallet-management'
+import { Button } from '@mui/material'
+import { useTranslation } from 'react-i18next'
+import { useChain } from '../../hooks/useChain.js'
+import { useWidgetConfig } from '../../providers/WidgetProvider/WidgetProvider.js'
+import { useFieldValues } from '../../stores/form/useFieldValues.js'
+import type { BaseTransactionButtonProps } from './types.js'
 
 export const BaseTransactionButton: React.FC<BaseTransactionButtonProps> = ({
   onClick,
@@ -14,34 +12,34 @@ export const BaseTransactionButton: React.FC<BaseTransactionButtonProps> = ({
   disabled,
   loading,
 }) => {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
-  const { walletConfig } = useWidgetConfig();
-  const [fromChainId] = useFieldValues('fromChain');
-  const { chain } = useChain(fromChainId);
-  const { account } = useAccount({ chainType: chain?.chainType });
+  const { t } = useTranslation()
+  const { walletConfig } = useWidgetConfig()
+  const { openWalletMenu } = useWalletMenu()
+  const [fromChainId] = useFieldValues('fromChain')
+  const { chain } = useChain(fromChainId)
+  const { account } = useAccount({ chainType: chain?.chainType })
 
   const handleClick = async () => {
     if (account.isConnected) {
-      onClick?.();
+      onClick?.()
     } else if (walletConfig?.onConnect) {
-      walletConfig.onConnect();
+      walletConfig.onConnect()
     } else {
-      navigate(navigationRoutes.selectWallet);
+      openWalletMenu()
     }
-  };
+  }
 
   const getButtonText = () => {
     if (account.isConnected) {
       if (text) {
-        return text;
+        return text
       }
     }
-    return t(`button.connectWallet`);
-  };
+    return t('button.connectWallet')
+  }
 
   return (
-    <LoadingButton
+    <Button
       variant="contained"
       color="primary"
       onClick={handleClick}
@@ -51,6 +49,6 @@ export const BaseTransactionButton: React.FC<BaseTransactionButtonProps> = ({
       fullWidth
     >
       {getButtonText()}
-    </LoadingButton>
-  );
-};
+    </Button>
+  )
+}

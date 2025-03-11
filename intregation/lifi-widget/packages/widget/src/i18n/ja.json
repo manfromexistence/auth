@@ -16,10 +16,10 @@
     "bridgeReview": "",
     "buy": "購入",
     "cancel": "キャンセル",
-    "changeWallet": "ウォレットを変更",
     "checkoutReview": "",
     "close": "閉じる",
     "confirm": "確認する",
+    "connectAnotherWallet": "",
     "connectWallet": "ウォレットを接続",
     "contactSupport": "サポートへのお問い合わせ",
     "continue": "続ける",
@@ -52,12 +52,14 @@
   },
   "header": {
     "activeTransactions": "アクティブなトランザクション",
+    "amount": "",
     "bookmarkedWallets": "ブックマークされたウォレット",
     "bridge": "ブリッジ",
     "checkout": "支払い",
     "checkoutDetails": "",
     "deposit": "",
     "depositDetails": "",
+    "depositTo": "",
     "exchange": "スワップ",
     "from": "交換元",
     "gas": "ガス",
@@ -82,6 +84,9 @@
       "autoRefuel": "{{chainName}} のガスが不足していますが、続行することでトランザクションを完了するのに十分なガスが補填されます。",
       "emptyActiveTransactions": "進行中のトランザクションがここに表示されます。完了すると、トランザクション履歴に表示されます。",
       "emptyTokenList": "{{chainName}} チェーンでトークンが見つかりませんでした。使いたいトークンが表示されない場合はコントラクトアドレスで検索するか、別のチェーンを選択してください。",
+      "emptyChainList": "",
+      "emptyBridgesList": "",
+      "emptyExchangesList": "",
       "emptyTransactionHistory": "トランザクション履歴はローカルにのみ保存され、ユーザーがブラウザデータを消去すると削除されます。",
       "fundsToExchange": "送金される資金は失われる可能性があります",
       "toAddressIsRequired": "送金先のウォレットアドレスを入力してください。",
@@ -139,6 +144,7 @@
       "signatureRejected": "トランザクションを完了するには署名が必要です。{{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}}（{{chainName}}）はウォレットに残ります。",
       "slippageThreshold": "スリップページが定義されたしきい値よりも大きいです。新しい見積もりをリクエストしてください。",
       "transactionCanceled": "トランザクションがキャンセルされました。",
+      "transactionConflict": "",
       "transactionExpired": "",
       "transactionFailed": "詳細については、ブロックエクスプローラをご確認ください。",
       "transactionNotSent": "トランザクションは送信されませんでした。",
@@ -158,6 +164,7 @@
       "signatureRejected": "署名が必要です",
       "slippageNotMet": "スリッページの条件が満たされていません",
       "transactionCanceled": "トランザクションはキャンセルされました",
+      "transactionConflict": "",
       "transactionExpired": "",
       "transactionFailed": "トランザクションが失敗しました",
       "transactionSimulationFailed": "",
@@ -260,13 +267,15 @@
     "stepBridge": "ブリッジ",
     "stepBridgeAndBuy": "ブリッジと購入",
     "stepBridgeAndDeposit": "",
+    "stepBuy": "購入",
+    "stepDeposit": "",
     "stepDetails": "LI.FI経由の{{tool}}",
     "stepSwap": "スワップ",
     "stepSwapAndBridge": "スワップとブリッジ",
     "stepSwapAndBuy": "スワップと購入",
     "stepSwapAndDeposit": "",
-    "supportId": "サポートID",
     "swapStepDetails": "{{chain}} で {{tool}} 経由のスワップ",
+    "transferId": "",
     "tags": {
       "cheapest": "最良",
       "fastest": "最速"
@@ -275,7 +284,10 @@
     "tokenOnChain": "{{chainName}} の {{tokenSymbol}}",
     "tokenOnChainAmount": "{{chainName}} の {{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}}",
     "tokenSearch": "トークン名またはアドレスで検索",
-    "valueLoss": "損失額"
+    "valueLoss": "損失額",
+    "searchChains": "",
+    "searchBridges": "",
+    "searchExchanges": ""
   },
   "settings": {
     "theme": "テーマ",
@@ -303,8 +315,5 @@
     "noBookmarkedWallets": "ブックマークされたウォレットはありません",
     "noConnectedWallets": "接続中のウォレットはありません",
     "noRecentWallets": "最近使ったウォレットはありません"
-  },
-  "wallet": {
-    "extensionNotFound": "このウォレットを選択する前に、 {{name}} ブラウザ拡張機能のみが有効であることを確認してください。"
   }
 }

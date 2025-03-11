@@ -20,12 +20,12 @@
 - Embeddable variants - compact, wide, and drawer
 - Options to allow or deny certain chains, tokens, bridges, and exchanges
 - Pre-configured themes and lots of customization options with dark mode support so you can match the look and feel of your web app 
-- Wallet management UI with the option to opt-out and use your own ([Wagmi](https://wagmi.sh/) and [Solana Wallet Standard](https://github.com/anza-xyz/wallet-standard) support)
+- Wallet management UI with the option to opt-out and use your own ([Wagmi](https://wagmi.sh/), [Bigmi](https://github.com/lifinance/bigmi) and [Solana Wallet Standard](https://github.com/anza-xyz/wallet-standard) support)
 - View of transactions in progress and transaction history
 - Curated wallet lists and wallet bookmarks
 - Route settings for advanced users (stored locally)
 - Complete UI translations to match your customer’s preferred language
-- Compatibility tested with React, Next.js, Vue, Nuxt.js, Svelte, Remix, Gatsby, Vite, CRA, RainbowKit
+- Compatibility tested with React, Next.js, Vue, Nuxt.js, Svelte, Remix, Gatsby, Vite, RainbowKit, Privy, Dynamic
 
 ## Installation
 
@@ -33,21 +33,38 @@
 
 LI.FI Widget is available as an [npm package](https://www.npmjs.com/package/@lifi/widget).
 
+**pnpm:**
+
+```sh
+pnpm add @lifi/widget wagmi @bigmi/react @solana/wallet-adapter-react @tanstack/react-query
+```
+
 **npm:**
 
 ```sh
-npm install @lifi/widget
+npm install @lifi/widget wagmi @bigmi/react @solana/wallet-adapter-react @tanstack/react-query
 ```
 
 **yarn:**
 
 ```sh
-yarn add @lifi/widget
+yarn add @lifi/widget wagmi @bigmi/react @solana/wallet-adapter-react @tanstack/react-query
 ```
+
+- [Wagmi](https://wagmi.sh/) is type safe, extensible, and modular library for building Ethereum apps.
+- [Bigmi](https://github.com/lifinance/bigmi) is modular TypeScript library that provides reactive primitives for building Bitcoin applications.
+- [@solana/wallet-adapter-react](https://github.com/anza-xyz/wallet-adapter) is modular TypeScript wallet adapters and components for Solana applications.
+- [TanStack Query](https://tanstack.com/query/v5) is an async state manager that handles requests, caching, and more.
 
 ### LI.FI Wallet Management
 
 LI.FI Wallet Management is available as an [npm package](https://www.npmjs.com/package/@lifi/wallet-management).
+
+**pnpm:**
+
+```sh
+pnpm add @lifi/wallet-management
+```
 
 **npm:**
 

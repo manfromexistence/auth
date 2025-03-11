@@ -16,10 +16,10 @@
     "bridgeReview": "",
     "buy": "",
     "cancel": "रद्द करें",
-    "changeWallet": "",
     "checkoutReview": "",
     "close": "",
     "confirm": "",
+    "connectAnotherWallet": "",
     "connectWallet": "वॉलेट से जुड़ें?",
     "contactSupport": "ग्राहक सेवा के लिए संपर्क करें",
     "continue": "जारी रखें",
@@ -52,12 +52,14 @@
   },
   "header": {
     "activeTransactions": "",
+    "amount": "",
     "bookmarkedWallets": "",
     "bridge": "",
     "checkout": "",
     "checkoutDetails": "",
     "deposit": "",
     "depositDetails": "",
+    "depositTo": "",
     "exchange": "",
     "from": "",
     "gas": "गैस",
@@ -82,6 +84,9 @@
       "autoRefuel": "",
       "emptyActiveTransactions": "",
       "emptyTokenList": "",
+      "emptyChainList": "",
+      "emptyBridgesList": "",
+      "emptyExchangesList": "",
       "emptyTransactionHistory": "",
       "fundsToExchange": "",
       "toAddressIsRequired": "",
@@ -139,6 +144,7 @@
       "signatureRejected": "",
       "slippageThreshold": "",
       "transactionCanceled": "",
+      "transactionConflict": "",
       "transactionExpired": "",
       "transactionFailed": "",
       "transactionNotSent": "",
@@ -158,6 +164,7 @@
       "signatureRejected": "",
       "slippageNotMet": "",
       "transactionCanceled": "",
+      "transactionConflict": "",
       "transactionExpired": "",
       "transactionFailed": "",
       "transactionSimulationFailed": "",
@@ -260,13 +267,15 @@
     "stepBridge": "",
     "stepBridgeAndBuy": "",
     "stepBridgeAndDeposit": "",
+    "stepBuy": "",
+    "stepDeposit": "",
     "stepDetails": "",
     "stepSwap": "",
     "stepSwapAndBridge": "",
     "stepSwapAndBuy": "",
     "stepSwapAndDeposit": "",
-    "supportId": "",
     "swapStepDetails": "",
+    "transferId": "",
     "tags": {
       "cheapest": "",
       "fastest": ""
@@ -275,7 +284,10 @@
     "tokenOnChain": "",
     "tokenOnChainAmount": "",
     "tokenSearch": "",
-    "valueLoss": ""
+    "valueLoss": "",
+    "searchChains": "",
+    "searchBridges": "",
+    "searchExchanges": ""
   },
   "settings": {
     "theme": "",
@@ -303,8 +315,5 @@
     "noBookmarkedWallets": "",
     "noConnectedWallets": "",
     "noRecentWallets": ""
-  },
-  "wallet": {
-    "extensionNotFound": ""
   }
 }

@@ -16,10 +16,10 @@
     "bridgeReview": "",
     "buy": "Beli",
     "cancel": "Batal",
-    "changeWallet": "Ubah Dompet",
     "checkoutReview": "",
     "close": "Tutup",
     "confirm": "Konfirmasi",
+    "connectAnotherWallet": "",
     "connectWallet": "Hubungkan dompet",
     "contactSupport": "Kontak bantuan",
     "continue": "Lanjutkan",
@@ -52,12 +52,14 @@
   },
   "header": {
     "activeTransactions": "Transaksi aktif",
+    "amount": "",
     "bookmarkedWallets": "Dompet yang ditandai",
     "bridge": "Bridge",
     "checkout": "Checkout",
     "checkoutDetails": "",
     "deposit": "",
     "depositDetails": "",
+    "depositTo": "",
     "exchange": "Pertukaran",
     "from": "Swap dari",
     "gas": "Gas",
@@ -82,6 +84,9 @@
       "autoRefuel": "Gas anda hampir habis {{chainName}}. Dengan melanjutkan, anda akan mendapatkan cukup gas untuk menyelesaikan penukaran.",
       "emptyActiveTransactions": "Transaksi yang sedang berlangsung akan muncul di sini. Setelah selesai, temukan di riwayat transaksi.",
       "emptyTokenList": "Kami tidak dapat menemukan token di jaringan {{chainName}} atau Anda tidak memilikinya. Silakan cari berdasarkan alamat kontrak jika token Anda tidak muncul atau pilih jaringan lain.",
+      "emptyChainList": "",
+      "emptyBridgesList": "",
+      "emptyExchangesList": "",
       "emptyTransactionHistory": "Riwayat transaksi hanya disimpan secara lokal dan akan dihapus jika Anda menghapus data browser.",
       "fundsToExchange": "Dana yang dikirim ke exchange mungkin akan hilang",
       "toAddressIsRequired": "Harap berikan alamat dompet tujuan ke mana dana akan ditransfer.",
@@ -139,6 +144,7 @@
       "signatureRejected": "Tanda tangan Anda diperlukan untuk menyelesaikan transaksi. {{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} di {{chainName}} tetap ada di dompet Anda.",
       "slippageThreshold": "Slippage lebih besar dari ambang batas yang ditentukan. Silakan minta rute baru untuk mendapatkan penawaran baru.",
       "transactionCanceled": "Transaksi dibatalkan.",
+      "transactionConflict": "",
       "transactionExpired": "Ketinggian blok telah melebihi batas maksimum yang diperbolehkan atau blockhash tidak lagi cukup baru.",
       "transactionFailed": "Silakan periksa block explorer untuk informasi lebih lanjut.",
       "transactionNotSent": "Transaksi tidak terkirim.",
@@ -158,6 +164,7 @@
       "signatureRejected": "Tanda tangan diperlukan",
       "slippageNotMet": "Kondisi slippage tidak terpenuhi",
       "transactionCanceled": "Transaksi dibatalkan",
+      "transactionConflict": "",
       "transactionExpired": "Transaksi berakhir",
       "transactionFailed": "Transaksi gagal",
       "transactionSimulationFailed": "Verifikasi transaksi gagal",
@@ -260,13 +267,15 @@
     "stepBridge": "Bridge",
     "stepBridgeAndBuy": "Bridge dan beli",
     "stepBridgeAndDeposit": "",
+    "stepBuy": "Beli",
+    "stepDeposit": "",
     "stepDetails": "{{tool}} melalui LI.FI",
     "stepSwap": "Swap",
     "stepSwapAndBridge": "Swap dan bridge",
     "stepSwapAndBuy": "Swap dan beli",
     "stepSwapAndDeposit": "",
-    "supportId": "ID dukungan",
     "swapStepDetails": "Swap di {{chain}} melalui {{tool}}",
+    "transferId": "",
     "tags": {
       "cheapest": "Pengembalian terbaik",
       "fastest": "Tercepat"
@@ -275,7 +284,10 @@
     "tokenOnChain": "{{tokenSymbol}} di {{chainName}}",
     "tokenOnChainAmount": "{{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} di {{chainName}}",
     "tokenSearch": "Cari berdasarkan nama atau alamat token",
-    "valueLoss": "Kehilangan nilai"
+    "valueLoss": "Kehilangan nilai",
+    "searchChains": "",
+    "searchBridges": "",
+    "searchExchanges": ""
   },
   "settings": {
     "theme": "Tema",
@@ -303,8 +315,5 @@
     "noBookmarkedWallets": "Tidak ada dompet yang ditandai",
     "noConnectedWallets": "Tida ada dompet yang di hubungkan",
     "noRecentWallets": "Tidak ada dompet terakhir yang digunakan"
-  },
-  "wallet": {
-    "extensionNotFound": "Pastikan hanya ekstensi browser {{name}} yang aktif sebelum memilih dompet ini."
   }
 }

@@ -1,57 +1,78 @@
-import { getConnectorIcon } from '@lifi/wallet-management';
-import { ExpandMore, Wallet } from '@mui/icons-material';
-import { Avatar, Badge } from '@mui/material';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router-dom';
-import type { Account } from '../../hooks/useAccount.js';
-import { useAccount } from '../../hooks/useAccount.js';
-import { useChain } from '../../hooks/useChain.js';
-import { useHasExternalWalletProvider } from '../../providers/WalletProvider/useHasExternalWalletProvider.js';
-import { useWidgetConfig } from '../../providers/WidgetProvider/WidgetProvider.js';
-import { HiddenUI } from '../../types/widget.js';
-import { navigationRoutes } from '../../utils/navigationRoutes.js';
-import { shortenAddress } from '../../utils/wallet.js';
-import { SmallAvatar } from '../SmallAvatar.js';
-import { CloseDrawerButton } from './CloseDrawerButton.js';
+import type { Account } from '@lifi/wallet-management'
+import {
+  getConnectorIcon,
+  useAccount,
+  useWalletMenu,
+} from '@lifi/wallet-management'
+import { ExpandMore, Wallet } from '@mui/icons-material'
+import { Avatar, Badge } from '@mui/material'
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useChain } from '../../hooks/useChain.js'
+import { useExternalWalletProvider } from '../../providers/WalletProvider/useExternalWalletProvider.js'
+import { useWidgetConfig } from '../../providers/WidgetProvider/WidgetProvider.js'
+import { useFieldValues } from '../../stores/form/useFieldValues.js'
+import { HiddenUI } from '../../types/widget.js'
+import { shortenAddress } from '../../utils/wallet.js'
+import { SmallAvatar } from '../Avatar/SmallAvatar.js'
+import { CloseDrawerButton } from './CloseDrawerButton.js'
 import {
   DrawerWalletContainer,
   HeaderAppBar,
   WalletAvatar,
   WalletButton,
-} from './Header.style.js';
-import { WalletMenu } from './WalletMenu.js';
-import { WalletMenuContainer } from './WalletMenu.style.js';
+} from './Header.style.js'
+import { WalletMenu } from './WalletMenu.js'
+import { WalletMenuContainer } from './WalletMenu.style.js'
+
+const useInternalWalletManagement = () => {
+  const { subvariant, hiddenUI } = useWidgetConfig()
+  const { useExternalWalletProvidersOnly } = useExternalWalletProvider()
+
+  const isSplitVariant = subvariant === 'split'
+  const isWalletMenuHidden = hiddenUI?.includes(HiddenUI.WalletMenu)
+
+  const shouldShowWalletMenu =
+    !useExternalWalletProvidersOnly && !isWalletMenuHidden
+
+  return {
+    shouldShowWalletMenu,
+    isSplitVariant,
+  }
+}
 
 export const WalletHeader: React.FC = () => {
-  const { subvariant, hiddenUI } = useWidgetConfig();
-  const { hasExternalProvider } = useHasExternalWalletProvider();
-  return !hasExternalProvider &&
-    subvariant !== 'split' &&
-    !hiddenUI?.includes(HiddenUI.WalletMenu) ? (
+  const { shouldShowWalletMenu, isSplitVariant } = useInternalWalletManagement()
+
+  return shouldShowWalletMenu && !isSplitVariant ? (
     <HeaderAppBar elevation={0} sx={{ justifyContent: 'flex-end' }}>
       <WalletMenuButton />
     </HeaderAppBar>
-  ) : null;
-};
+  ) : null
+}
 
 export const SplitWalletMenuButton: React.FC = () => {
-  const { hiddenUI } = useWidgetConfig();
-  const { hasExternalProvider } = useHasExternalWalletProvider();
-  return !hasExternalProvider && !hiddenUI?.includes(HiddenUI.WalletMenu) ? (
-    <WalletMenuButton />
-  ) : null;
-};
+  const { shouldShowWalletMenu, isSplitVariant } = useInternalWalletManagement()
+  return shouldShowWalletMenu && isSplitVariant ? <WalletMenuButton /> : null
+}
 
 export const WalletMenuButton: React.FC = () => {
-  const { account } = useAccount();
-  const { variant, hiddenUI } = useWidgetConfig();
+  const { variant, hiddenUI } = useWidgetConfig()
+  const { account, accounts } = useAccount()
+
+  const [fromChainId] = useFieldValues('fromChain')
+  const { chain: fromChain } = useChain(fromChainId)
+
+  const activeAccount =
+    (fromChain
+      ? accounts.find((account) => account.chainType === fromChain.chainType)
+      : undefined) || account
 
   if (variant === 'drawer') {
     return (
       <DrawerWalletContainer>
-        {account.isConnected ? (
-          <ConnectedButton account={account} />
+        {activeAccount.isConnected ? (
+          <ConnectedButton account={activeAccount} />
         ) : (
           <ConnectButton />
         )}
@@ -59,27 +80,27 @@ export const WalletMenuButton: React.FC = () => {
           <CloseDrawerButton header="wallet" />
         ) : null}
       </DrawerWalletContainer>
-    );
+    )
   }
-  return account.isConnected ? (
-    <ConnectedButton account={account} />
+  return activeAccount.isConnected ? (
+    <ConnectedButton account={activeAccount} />
   ) : (
     <ConnectButton />
-  );
-};
+  )
+}
 
 const ConnectButton = () => {
-  const { t } = useTranslation();
-  const { pathname } = useLocation();
-  const { walletConfig, subvariant, variant } = useWidgetConfig();
-  const navigate = useNavigate();
+  const { t } = useTranslation()
+  const { walletConfig, subvariant, variant } = useWidgetConfig()
+  const { openWalletMenu } = useWalletMenu()
   const connect = async () => {
-    if (walletConfig?.onConnect) {
-      walletConfig.onConnect();
-      return;
+    if (!walletConfig?.usePartialWalletManagement && walletConfig?.onConnect) {
+      walletConfig.onConnect()
+      return
     }
-    navigate(navigationRoutes.selectWallet);
-  };
+    openWalletMenu()
+  }
+
   return (
     <WalletButton
       subvariant={subvariant}
@@ -91,28 +112,26 @@ const ConnectButton = () => {
           <Wallet sx={{ marginLeft: -0.25 }} />
         ) : undefined
       }
-      onClick={
-        !pathname.includes(navigationRoutes.selectWallet) ? connect : undefined
-      }
+      onClick={connect}
     >
-      {t(`button.connectWallet`)}
+      {t('button.connectWallet')}
     </WalletButton>
-  );
-};
+  )
+}
 
 const ConnectedButton = ({ account }: { account: Account }) => {
-  const { subvariant } = useWidgetConfig();
-  const { chain } = useChain(account.chainId);
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-  const walletAddress = shortenAddress(account.address);
+  const { subvariant } = useWidgetConfig()
+  const { chain } = useChain(account.chainId)
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
+  const walletAddress = shortenAddress(account.address)
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
 
   const handleClose = () => {
-    setAnchorEl(null);
-  };
+    setAnchorEl(null)
+  }
 
   return (
     <>
@@ -163,5 +182,5 @@ const ConnectedButton = ({ account }: { account: Account }) => {
         <WalletMenu onClose={handleClose} />
       </WalletMenuContainer>
     </>
-  );
-};
+  )
+}

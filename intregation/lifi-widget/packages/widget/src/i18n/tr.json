@@ -16,10 +16,10 @@
     "bridgeReview": "Köprüyü incele",
     "buy": "Satın al",
     "cancel": "İptal",
-    "changeWallet": "Cüzdan değiştir",
     "checkoutReview": "Satın alımı incele",
     "close": "Kapat",
     "confirm": "Onayla",
+    "connectAnotherWallet": "",
     "connectWallet": "Cüzdanı Bağla",
     "contactSupport": "Destek Ekibine Ulaş",
     "continue": "Devam et",
@@ -52,12 +52,14 @@
   },
   "header": {
     "activeTransactions": "Aktif işlemler",
+    "amount": "",
     "bookmarkedWallets": "Kayıtlı cüzdanlar",
     "bridge": "Gönder",
     "checkout": "Ödeme yap",
     "checkoutDetails": "Ödeme detayları",
     "deposit": "Para Yatır",
     "depositDetails": "Para Yatırma Detayı",
+    "depositTo": "",
     "exchange": "Al-Sat",
     "from": "Şundan takas et",
     "gas": "Gaz",
@@ -82,6 +84,9 @@
       "autoRefuel": "{{chainName}} ağında gaz yetersiz. Devam ederek, işlem için gereken miktarda gaz alacaksınız.",
       "emptyActiveTransactions": "Devam eden işlemler burada görünecek. Tamamlandığında, işlem geçmişinden bulabilirsiniz.",
       "emptyTokenList": "{{chainName}} ağında token bulamadık veya sizde hiç token yok. Lütfen tekrar aramayı deneyin veya başka bir ağ seçin.",
+      "emptyChainList": "",
+      "emptyBridgesList": "",
+      "emptyExchangesList": "",
       "emptyTransactionHistory": "İşlem geçmişi yalnızca yerel olarak saklanır ve tarayıcı verilerinizi temizlerseniz silinir.",
       "fundsToExchange": "Borsa hesabına göndermek fonlarınızı kaybetmenize yol açabilir",
       "toAddressIsRequired": "Lütfen varlıklarınızı göndermek istediğiniz hedef adresi girin.",
@@ -139,6 +144,7 @@
       "signatureRejected": "İşlemi tamamlamak için imzanız gerekiyor. {{chainName}} üzerinde {{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} cüzdanınızda bulunmaktadır.",
       "slippageThreshold": "Slipaj, tanımlanan eşikten daha büyük. Yeni bir fiyat teklifi almak için lütfen yeni bir rota isteyin.",
       "transactionCanceled": "İşlem iptal edildi.",
+      "transactionConflict": "",
       "transactionExpired": "Blok yüksekliği izin verilen maksimum sınırı aştı veya blok hash'i artık yeterince güncel değil.",
       "transactionFailed": "Daha fazla bilgi için ağ tarayıcısını kontrol edin.",
       "transactionNotSent": "İşlem gönderilmedi.",
@@ -158,6 +164,7 @@
       "signatureRejected": "İmza gerekiyor",
       "slippageNotMet": "Slipaj koşulları karşılanmadı",
       "transactionCanceled": "İşlem iptal edildi",
+      "transactionConflict": "",
       "transactionExpired": "İşlem zaman aşımına uğradı",
       "transactionFailed": "İşlem başarısız",
       "transactionSimulationFailed": "İşlem simulasyonu başarısız oldu",
@@ -260,13 +267,15 @@
     "stepBridge": "Köprüle",
     "stepBridgeAndBuy": "Köprüle ve satın al",
     "stepBridgeAndDeposit": "Köprüle ve yatır",
+    "stepBuy": "Satın al",
+    "stepDeposit": "Para Yatır",
     "stepDetails": "LI.FI aracılığıyla {{tool}}",
     "stepSwap": "Takas et",
     "stepSwapAndBridge": "Takas et ve Köprüle",
     "stepSwapAndBuy": "Takasla ve satın al",
     "stepSwapAndDeposit": "Takas et ve yatır",
-    "supportId": "Destek",
     "swapStepDetails": "{{chain}} üzerinde {{tool}} aracılığıyla takas et",
+    "transferId": "",
     "tags": {
       "cheapest": "En iyi sonuç",
       "fastest": "En Hızlı"
@@ -275,7 +284,10 @@
     "tokenOnChain": "{{chainName}} üzerindeki {{tokenSymbol}}",
     "tokenOnChainAmount": "{{chainName}} üzerindeki {{amount, number(maximumFractionDigits: 9)}}{{tokenSymbol}}",
     "tokenSearch": "Tokenlerinizi adres ve ya isim aracılığıyla arayın",
-    "valueLoss": "Değer kaybı"
+    "valueLoss": "Değer kaybı",
+    "searchChains": "",
+    "searchBridges": "",
+    "searchExchanges": ""
   },
   "settings": {
     "theme": "Tema",
@@ -303,8 +315,5 @@
     "noBookmarkedWallets": "Kayıtlı cüzdan bulunamadı",
     "noConnectedWallets": "Bağlı cüzdan bulunamadı",
     "noRecentWallets": "Son kullanılan cüzdan bulunamadı"
-  },
-  "wallet": {
-    "extensionNotFound": "Lütfen bu cüzdanı seçmeden önce yalnızca {{name}} tarayıcı uzantısının etkin olduğundan emin olun."
   }
 }

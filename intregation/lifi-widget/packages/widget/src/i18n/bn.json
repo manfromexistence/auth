@@ -16,10 +16,10 @@
     "bridgeReview": "",
     "buy": "",
     "cancel": "বাতিল করুন",
-    "changeWallet": "",
     "checkoutReview": "",
     "close": "",
     "confirm": "",
+    "connectAnotherWallet": "",
     "connectWallet": "ওয়ালেট সংযুক্ত করুন",
     "contactSupport": "সাপোর্ট এ যোগাযোগ করুন",
     "continue": "এগিয়ে যান",
@@ -52,12 +52,14 @@
   },
   "header": {
     "activeTransactions": "",
+    "amount": "",
     "bookmarkedWallets": "",
     "bridge": "",
     "checkout": "চেকআউট",
     "checkoutDetails": "",
     "deposit": "",
     "depositDetails": "",
+    "depositTo": "",
     "exchange": "",
     "from": "থেকে সোওয়াপ করুন",
     "gas": "গ্যাস",
@@ -82,6 +84,9 @@
       "autoRefuel": "আপনার {{chainName}} গ্যাস কম। চালিয়ে যাওয়ার মাধ্যমে, আপনি সোওয়াপ সম্পূর্ণ করার জন্য পর্যাপ্ত গ্যাস পাবেন।",
       "emptyActiveTransactions": "",
       "emptyTokenList": "",
+      "emptyChainList": "",
+      "emptyBridgesList": "",
+      "emptyExchangesList": "",
       "emptyTransactionHistory": "",
       "fundsToExchange": "",
       "toAddressIsRequired": "",
@@ -139,6 +144,7 @@
       "signatureRejected": "",
       "slippageThreshold": "স্লিপেজ সংজ্ঞায়িত থ্রেশহোল্ডের চেয়ে বড়। একটি নতুন উদ্ধৃতি পেতে একটি নতুন রুট অনুরোধ করুন।",
       "transactionCanceled": "",
+      "transactionConflict": "",
       "transactionExpired": "",
       "transactionFailed": "আরও তথ্যের জন্য ব্লক এক্সপ্লোরার চেক করুন।",
       "transactionNotSent": "",
@@ -158,6 +164,7 @@
       "signatureRejected": "",
       "slippageNotMet": "স্লিপেজ শর্ত পূরণ করা হয়নি",
       "transactionCanceled": "লেনদেন বাতিল করা হয়েছে",
+      "transactionConflict": "",
       "transactionExpired": "",
       "transactionFailed": "লেনদেন ব্যর্থ হয়েছে",
       "transactionSimulationFailed": "",
@@ -260,13 +267,15 @@
     "stepBridge": "ব্রিজ",
     "stepBridgeAndBuy": "",
     "stepBridgeAndDeposit": "",
+    "stepBuy": "",
+    "stepDeposit": "",
     "stepDetails": "লি.ফাই এর মাধ্যমে {{tool}}",
     "stepSwap": "সোওয়াপ",
     "stepSwapAndBridge": "সোওয়াপ এবং ব্রিজ",
     "stepSwapAndBuy": "",
     "stepSwapAndDeposit": "",
-    "supportId": "সাপোর্ট আইডি",
     "swapStepDetails": "{{tool}} এর মাধ্যমে {{chain}} এ সোওয়াপ করুন",
+    "transferId": "",
     "tags": {
       "cheapest": "",
       "fastest": ""
@@ -275,7 +284,10 @@
     "tokenOnChain": "{{chainName}} -এ {{tokenSymbol}}",
     "tokenOnChainAmount": "{{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} {{chainName}} -এ",
     "tokenSearch": "আপনার টোকেন অনুসন্ধান করুন",
-    "valueLoss": "মান ক্ষতি"
+    "valueLoss": "মান ক্ষতি",
+    "searchChains": "",
+    "searchBridges": "",
+    "searchExchanges": ""
   },
   "settings": {
     "theme": "",
@@ -303,8 +315,5 @@
     "noBookmarkedWallets": "",
     "noConnectedWallets": "",
     "noRecentWallets": ""
-  },
-  "wallet": {
-    "extensionNotFound": "এই ওয়ালেটটি বেছে নেওয়ার আগে দয়া করে নিশ্চিত করুন যে শুধুমাত্র {{name}} ব্রাউজার এক্সটেনশন সক্রিয় আছে।"
   }
 }

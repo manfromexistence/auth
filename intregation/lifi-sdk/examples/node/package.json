@@ -4,17 +4,15 @@
   "type": "module",
   "description": "Sample project to showcase the usage of @lifi/sdk",
   "main": "examples/swap.ts",
-  "author": "Max Klenk <max@li.finance>",
+  "author": "LI.FI <github@li.finance>",
   "license": "MIT",
   "dependencies": {
-    "@lifi/data-types": "^4.2.1",
-    "@lifi/rpc-wrapper": "^0.0.27",
-    "@lifi/sdk": "^3.0.0-alpha.63",
-    "@types/dotenv": "^8.2.0",
-    "@wagmi/connectors": "^4.3.9",
-    "@wagmi/core": "^2.9.7",
-    "dotenv": "^16.4.5",
-    "viem": "^2.12.1"
+    "@lifi/data-types": "^6.3.1",
+    "@lifi/sdk": "^3.5.4",
+    "@wagmi/connectors": "^5.7.8",
+    "@wagmi/core": "^2.16.5",
+    "dotenv": "^16.4.7",
+    "viem": "^2.23.9"
   },
   "scripts": {
     "example:swap": "tsx examples/swap.ts",
@@ -26,8 +24,9 @@
     "example:yearn": "tsx examples/yearnDeposit.ts"
   },
   "devDependencies": {
-    "@types/node": "^20.12.12",
-    "tsx": "^4.10.2",
-    "typescript": "^5.4.5"
-  }
+    "@types/node": "^22.13.10",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  },
+  "packageManager": "pnpm@10.5.2"
 }

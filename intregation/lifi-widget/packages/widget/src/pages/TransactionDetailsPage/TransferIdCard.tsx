@@ -1,32 +1,32 @@
-import { ContentCopyRounded, OpenInNew } from '@mui/icons-material';
-import { Box, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
-import { Card } from '../../components/Card/Card.js';
-import { CardIconButton } from '../../components/Card/CardIconButton.js';
-import { CardTitle } from '../../components/Card/CardTitle.js';
-import { useExplorer } from '../../hooks/useExplorer.js';
+import { ContentCopyRounded, OpenInNew } from '@mui/icons-material'
+import { Box, Typography } from '@mui/material'
+import { useTranslation } from 'react-i18next'
+import { Card } from '../../components/Card/Card.js'
+import { CardIconButton } from '../../components/Card/CardIconButton.js'
+import { CardTitle } from '../../components/Card/CardTitle.js'
+import { useExplorer } from '../../hooks/useExplorer.js'
 
 interface TransferIdCardProps {
-  transferId: string;
+  transferId: string
 }
 
 const getTxHash = (transferId: string) =>
   transferId.indexOf('_') !== -1
     ? transferId.substring(0, transferId.indexOf('_'))
-    : transferId;
+    : transferId
 
 export const TransferIdCard = ({ transferId }: TransferIdCardProps) => {
-  const { t } = useTranslation();
-  const { getTransactionLink } = useExplorer();
+  const { t } = useTranslation()
+  const { getTransactionLink } = useExplorer()
 
   const copyTransferId = async () => {
-    await navigator.clipboard.writeText(transferId);
-  };
+    await navigator.clipboard.writeText(transferId)
+  }
 
   const openTransferIdInExplorer = () => {
-    const txHash = getTxHash(transferId);
-    window.open(getTransactionLink({ txHash }), '_blank');
-  };
+    const txHash = getTxHash(transferId)
+    window.open(getTransactionLink({ txHash }), '_blank')
+  }
 
   return (
     <Card sx={{ marginTop: 2 }}>
@@ -55,13 +55,15 @@ export const TransferIdCard = ({ transferId }: TransferIdCardProps) => {
       </Box>
       <Typography
         variant="body2"
-        pt={1}
-        pb={2}
-        px={2}
-        sx={{ wordBreak: 'break-all' }}
+        sx={{
+          pt: 1,
+          pb: 2,
+          px: 2,
+          wordBreak: 'break-all',
+        }}
       >
         {transferId}
       </Typography>
     </Card>
-  );
-};
+  )
+}

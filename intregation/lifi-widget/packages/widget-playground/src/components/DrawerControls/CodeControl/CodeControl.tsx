@@ -1,37 +1,43 @@
-import TabContext from '@mui/lab/TabContext';
-import { Box, Typography } from '@mui/material';
-import {
-  CRALogo,
-  GatsbyLogo,
-  NextLogo,
-  NuxtLogo,
-  RainbowKitLogo,
-  RemixLogo,
-  SvelteLogo,
-  ViteLogo,
-  VueLogo,
-} from '../../../logo';
-import { useCodeToolValues, useEditToolsActions } from '../../../store';
-import { Card } from '../../Card';
-import { Tab, Tabs } from '../../Tabs';
-import { TabContentContainer } from '../DrawerControls.style';
-import { CodeEditor } from './CodeEditor';
-import { FontEmbedInfo } from './FontEmbedInfo';
-import { ProjectButton } from './ProjectButton';
+import TabContext from '@mui/lab/TabContext'
+import { Box, Typography } from '@mui/material'
+import { GatsbyLogo } from '../../../logo/Gatsby'
+import { NextLogo } from '../../../logo/Next'
+import { NuxtLogo } from '../../../logo/Nuxt'
+import { RainbowKitLogo } from '../../../logo/RainbowKit'
+import { RemixLogo } from '../../../logo/Remix'
+import { SvelteLogo } from '../../../logo/Svelte'
+import { ViteLogo } from '../../../logo/Vite'
+import { VueLogo } from '../../../logo/Vue'
+import { useCodeToolValues } from '../../../store/editTools/useCodeToolValues'
+import { useEditToolsActions } from '../../../store/editTools/useEditToolsActions'
+import { Card } from '../../Card/Card.style'
+import { Tab, Tabs } from '../../Tabs/Tabs.style'
+import { TabContentContainer } from '../DrawerControls.style'
+import { CodeEditor } from './CodeEditor'
+import { FontEmbedInfo } from './FontEmbedInfo'
+import { ProjectButton } from './ProjectButton'
 
 export const CodeControl = () => {
-  const { codeControlTab } = useCodeToolValues();
-  const { setCodeControlTab } = useEditToolsActions();
+  const { codeControlTab } = useCodeToolValues()
+  const { setCodeControlTab } = useEditToolsActions()
 
   return (
     <Card
-      sx={{
-        p: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 1.5,
-        flexGrow: codeControlTab === 'config' ? 1 : 0,
-      }}
+      sx={[
+        {
+          p: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 1.5,
+        },
+        codeControlTab === 'config'
+          ? {
+              flexGrow: 1,
+            }
+          : {
+              flexGrow: 0,
+            },
+      ]}
     >
       <Box sx={{ maxWidth: 326, height: 56 }}>
         <Tabs
@@ -57,19 +63,13 @@ export const CodeControl = () => {
             Examples of the widget used in different projects
           </Typography>
           <ProjectButton
-            href="https://github.com/lifinance/widget/tree/main/examples/create-react-app"
-            icon={<CRALogo />}
-          >
-            Create-React-App
-          </ProjectButton>
-          <ProjectButton
             href="https://github.com/lifinance/widget/tree/main/examples/gatsby"
             icon={<GatsbyLogo />}
           >
             Gatsby
           </ProjectButton>
           <ProjectButton
-            href="https://github.com/lifinance/widget/tree/main/examples/nextjs14"
+            href="https://github.com/lifinance/widget/tree/main/examples/nextjs"
             icon={<NextLogo />}
           >
             Next.js
@@ -116,5 +116,5 @@ export const CodeControl = () => {
         </TabContentContainer>
       </TabContext>
     </Card>
-  );
-};
+  )
+}

@@ -16,10 +16,10 @@
     "bridgeReview": "",
     "buy": "Acquista",
     "cancel": "Annulla",
-    "changeWallet": "",
     "checkoutReview": "",
     "close": "",
     "confirm": "",
+    "connectAnotherWallet": "",
     "connectWallet": "Collega il portafoglio",
     "contactSupport": "Contatta l'assistenza",
     "continue": "Continua",
@@ -52,12 +52,14 @@
   },
   "header": {
     "activeTransactions": "Transazioni attive",
+    "amount": "",
     "bookmarkedWallets": "",
     "bridge": "Bridge",
     "checkout": "Checkout",
     "checkoutDetails": "",
     "deposit": "",
     "depositDetails": "",
+    "depositTo": "",
     "exchange": "Exchange",
     "from": "Scambia da",
     "gas": "Gas",
@@ -82,6 +84,9 @@
       "autoRefuel": "Livello basso di gas su {{chainName}}. Continuando avrai abbastanza gas per completare lo scambio.",
       "emptyActiveTransactions": "Le transazioni in corso appariranno qui. Una volta completate, potrai trovarle nella cronologia delle transazioni.",
       "emptyTokenList": "Non siamo riusciti a trovare token sulla chain {{chainName}} o non ne hai. Riprova o scegli un'altra chain.",
+      "emptyChainList": "",
+      "emptyBridgesList": "",
+      "emptyExchangesList": "",
       "emptyTransactionHistory": "La cronologia delle transazioni è memorizzata solo localmente e verrà eliminata se si cancellano i dati del browser.",
       "fundsToExchange": "",
       "toAddressIsRequired": "",
@@ -139,6 +144,7 @@
       "signatureRejected": "",
       "slippageThreshold": "Lo slittamento di prezzo è più alto della soglia definita. Si prega di richiedere una nuova route per ottenere una quota aggiornata.",
       "transactionCanceled": "",
+      "transactionConflict": "",
       "transactionExpired": "",
       "transactionFailed": "Per ulteriori informazioni, consultare il block explorer.",
       "transactionNotSent": "",
@@ -158,6 +164,7 @@
       "signatureRejected": "",
       "slippageNotMet": "Condizioni di slittamento di prezzo non rispettate",
       "transactionCanceled": "Transazione cancellata",
+      "transactionConflict": "",
       "transactionExpired": "",
       "transactionFailed": "Transazione fallita",
       "transactionSimulationFailed": "",
@@ -260,13 +267,15 @@
     "stepBridge": "Bridge",
     "stepBridgeAndBuy": "Trasferisci e acquista",
     "stepBridgeAndDeposit": "",
+    "stepBuy": "Acquista",
+    "stepDeposit": "",
     "stepDetails": "{{tool}} tramite LI.FI",
     "stepSwap": "Scambio",
     "stepSwapAndBridge": "Scambia e bridge",
     "stepSwapAndBuy": "Scambia e acquista",
     "stepSwapAndDeposit": "",
-    "supportId": "ID supporto",
     "swapStepDetails": "Scambio su {{chain}} tramite {{tool}}.",
+    "transferId": "",
     "tags": {
       "cheapest": "",
       "fastest": ""
@@ -275,7 +284,10 @@
     "tokenOnChain": "{{tokenSymbol}} su {{chainName}}",
     "tokenOnChainAmount": "{{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} su {{chainName}}",
     "tokenSearch": "Cerca per nome token o indirizzo",
-    "valueLoss": "Perdita di valore"
+    "valueLoss": "Perdita di valore",
+    "searchChains": "",
+    "searchBridges": "",
+    "searchExchanges": ""
   },
   "settings": {
     "theme": "",
@@ -303,8 +315,5 @@
     "noBookmarkedWallets": "",
     "noConnectedWallets": "",
     "noRecentWallets": ""
-  },
-  "wallet": {
-    "extensionNotFound": "Assicurati che solo l'estensione {{name}} del browser sia attiva prima di scegliere questo portafoglio."
   }
 }
