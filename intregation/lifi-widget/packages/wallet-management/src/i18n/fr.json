@@ -1,0 +1,14 @@
+{
+  "title": {
+    "connectWallet": "Connecter un portefeuille",
+    "connecting": "",
+    "selectEcosystem": "",
+    "waitingForWallet": "",
+    "availableWalletsNotFound": ""
+  },
+  "message": {
+    "connecting": "",
+    "multipleEcosystems": "",
+    "availableWalletsNotFound": ""
+  }
+}

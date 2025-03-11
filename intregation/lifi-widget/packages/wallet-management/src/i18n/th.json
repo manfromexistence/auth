@@ -1,0 +1,14 @@
+{
+  "title": {
+    "connectWallet": "เชื่อมต่อ กระเป๋า",
+    "connecting": "",
+    "selectEcosystem": "",
+    "waitingForWallet": "",
+    "availableWalletsNotFound": ""
+  },
+  "message": {
+    "connecting": "",
+    "multipleEcosystems": "",
+    "availableWalletsNotFound": ""
+  }
+}
